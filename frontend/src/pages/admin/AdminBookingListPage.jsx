@@ -5,6 +5,7 @@ import Pagination from "../../components/common/Pagination";
 import { adminBookingApi } from "../../api/adminBookingApi";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
+import AlertModal from "../../components/common/AlertModal";
 
 const AdminBookingListPage = () => {
   const [bookings, setBookings] = useState([]);
@@ -13,6 +14,8 @@ const AdminBookingListPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "error" });
+  const [cancelReason, setCancelReason] = useState({ isOpen: false, bookingId: null, reason: "" });
 
   useEffect(() => {
     fetchBookings();
@@ -48,19 +51,38 @@ const AdminBookingListPage = () => {
       await adminBookingApi.updateBookingStatus(bookingId, status);
       fetchBookings();
     } catch (err) {
-      alert(err.message || "상태 변경에 실패했습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: err.message || "상태 변경에 실패했습니다.",
+        type: "error",
+      });
     }
   };
 
   const handleCancel = async (bookingId) => {
-    const reason = prompt("취소 사유를 입력하세요:");
-    if (!reason) return;
+    setCancelReason({ isOpen: true, bookingId, reason: "" });
+  };
+
+  const handleCancelConfirm = async () => {
+    if (!cancelReason.reason.trim()) {
+      setAlertModal({
+        isOpen: true,
+        message: "취소 사유를 입력해주세요.",
+        type: "warning",
+      });
+      return;
+    }
 
     try {
-      await adminBookingApi.cancelBooking(bookingId, reason);
+      await adminBookingApi.cancelBooking(cancelReason.bookingId, cancelReason.reason);
       fetchBookings();
+      setCancelReason({ isOpen: false, bookingId: null, reason: "" });
     } catch (err) {
-      alert(err.message || "취소에 실패했습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: err.message || "취소에 실패했습니다.",
+        type: "error",
+      });
     }
   };
 
@@ -91,6 +113,51 @@ const AdminBookingListPage = () => {
         totalPages={totalPages}
         onPageChange={setCurrentPage}
       />
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+      />
+
+      {cancelReason.isOpen && (
+        <div className="custom-modal-overlay" onClick={() => setCancelReason({ isOpen: false, bookingId: null, reason: "" })}>
+          <div className="custom-modal-content" onClick={(e) => e.stopPropagation()}>
+            <h3 className="custom-modal-title">취소 사유 입력</h3>
+            <textarea
+              value={cancelReason.reason}
+              onChange={(e) => setCancelReason({ ...cancelReason, reason: e.target.value })}
+              placeholder="취소 사유를 입력하세요"
+              style={{
+                width: "100%",
+                minHeight: "100px",
+                padding: "0.75rem",
+                border: "1px solid #e2e8f0",
+                borderRadius: "8px",
+                fontSize: "0.875rem",
+                marginBottom: "1.5rem",
+                resize: "vertical",
+              }}
+            />
+            <div className="custom-modal-actions">
+              <button
+                className="custom-modal-button custom-modal-button-outline"
+                onClick={() => setCancelReason({ isOpen: false, bookingId: null, reason: "" })}
+              >
+                취소
+              </button>
+              <button
+                className="custom-modal-button"
+                onClick={handleCancelConfirm}
+                style={{ backgroundColor: "#7FD8BE" }}
+              >
+                확인
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

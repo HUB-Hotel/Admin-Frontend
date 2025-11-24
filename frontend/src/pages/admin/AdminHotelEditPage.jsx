@@ -4,6 +4,7 @@ import AdminHotelForm from "../../components/admin/hotels/AdminHotelForm";
 import { adminHotelApi } from "../../api/adminHotelApi";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
+import AlertModal from "../../components/common/AlertModal";
 
 const AdminHotelEditPage = () => {
   const { hotelId } = useParams();
@@ -11,6 +12,7 @@ const AdminHotelEditPage = () => {
   const [hotel, setHotel] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "success" });
 
   useEffect(() => {
     fetchHotel();
@@ -31,10 +33,20 @@ const AdminHotelEditPage = () => {
   const handleSubmit = async (formData) => {
     try {
       await adminHotelApi.updateHotel(hotelId, formData);
-      alert("호텔 정보가 수정되었습니다.");
-      navigate("/admin/hotels");
+      setAlertModal({
+        isOpen: true,
+        message: "호텔 정보가 수정되었습니다.",
+        type: "success",
+      });
+      setTimeout(() => {
+        navigate("/admin/hotels");
+      }, 1500);
     } catch (err) {
-      alert(err.message || "수정에 실패했습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: err.message || "수정에 실패했습니다.",
+        type: "error",
+      });
     }
   };
 
@@ -55,6 +67,13 @@ const AdminHotelEditPage = () => {
         hotel={hotel}
         onSubmit={handleSubmit}
         onCancel={handleCancel}
+      />
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
       />
     </div>
   );

@@ -5,6 +5,8 @@ import Pagination from "../../components/common/Pagination";
 import { adminReviewApi } from "../../api/adminReviewApi";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
+import AlertModal from "../../components/common/AlertModal";
+import ConfirmDialog from "../../components/common/ConfirmDialog";
 
 const AdminReviewListPage = () => {
   const [reviews, setReviews] = useState([]);
@@ -13,6 +15,8 @@ const AdminReviewListPage = () => {
   const [totalPages, setTotalPages] = useState(1);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "error" });
+  const [confirmDialog, setConfirmDialog] = useState({ isOpen: false, message: "", onConfirm: null });
 
   useEffect(() => {
     fetchReviews();
@@ -44,14 +48,24 @@ const AdminReviewListPage = () => {
   };
 
   const handleDelete = async (reviewId) => {
-    if (!confirm("정말 삭제하시겠습니까?")) return;
-
+    setConfirmDialog({
+      isOpen: true,
+      message: "정말 삭제하시겠습니까?",
+      onConfirm: async () => {
     try {
       await adminReviewApi.deleteReview(reviewId);
       fetchReviews();
+          setConfirmDialog({ ...confirmDialog, isOpen: false });
     } catch (err) {
-      alert(err.message || "삭제에 실패했습니다.");
+          setConfirmDialog({ ...confirmDialog, isOpen: false });
+          setAlertModal({
+            isOpen: true,
+            message: err.message || "삭제에 실패했습니다.",
+            type: "error",
+          });
     }
+      },
+    });
   };
 
   if (loading) return <Loader fullScreen />;
@@ -76,6 +90,21 @@ const AdminReviewListPage = () => {
         currentPage={currentPage}
         totalPages={totalPages}
         onPageChange={setCurrentPage}
+      />
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+      />
+
+      <ConfirmDialog
+        isOpen={confirmDialog.isOpen}
+        title="삭제 확인"
+        message={confirmDialog.message}
+        onConfirm={confirmDialog.onConfirm || (() => {})}
+        onCancel={() => setConfirmDialog({ ...confirmDialog, isOpen: false })}
       />
     </div>
   );

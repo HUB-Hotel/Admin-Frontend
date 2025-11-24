@@ -1,15 +1,26 @@
+import { useState } from "react";
 import { useAdminAuth } from "../../hooks/useAdminAuth";
 import AdminProfileForm from "../../components/admin/settings/AdminProfileForm";
+import AlertModal from "../../components/common/AlertModal";
 
 const AdminMyProfilePage = () => {
   const { adminInfo } = useAdminAuth();
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "success" });
 
   const handleSubmit = async (formData) => {
     try {
       // TODO: API 연결
-      alert("정보가 수정되었습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: "정보가 수정되었습니다.",
+        type: "success",
+      });
     } catch (err) {
-      alert(err.message || "수정에 실패했습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: err.message || "수정에 실패했습니다.",
+        type: "error",
+      });
     }
   };
 
@@ -21,6 +32,13 @@ const AdminMyProfilePage = () => {
       </div>
 
       <AdminProfileForm profile={adminInfo} onSubmit={handleSubmit} />
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+      />
     </div>
   );
 };

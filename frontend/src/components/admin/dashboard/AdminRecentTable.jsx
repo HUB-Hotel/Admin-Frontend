@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import StatusBadge from "../../common/StatusBadge";
 
 const AdminRecentTable = ({ bookings = [] }) => {
@@ -51,14 +50,7 @@ const AdminRecentTable = ({ bookings = [] }) => {
           <tbody>
             {recentBookings.map((booking) => (
               <tr key={booking.id}>
-                <td>
-                  <Link
-                    to={`/admin/bookings/${booking.id}`}
-                    style={{ color: "#7FD8BE", textDecoration: "underline" }}
-                  >
-                    {booking.id}
-                  </Link>
-                </td>
+                <td>{booking.id}</td>
                 <td>{booking.hotelName}</td>
                 <td>{booking.customerName}</td>
                 <td>

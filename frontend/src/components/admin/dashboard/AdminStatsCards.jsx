@@ -1,14 +1,6 @@
 const AdminStatsCards = ({ stats }) => {
   const statCards = [
     {
-      title: "오늘 예약",
-      value: stats?.todayBookings || 15,
-      change: "+12% 전일 대비",
-      changeType: "positive",
-      icon: "📅",
-      iconColor: "#3b82f6",
-    },
-    {
       title: "총 매출",
       value: `${(stats?.totalRevenue || 12500000).toLocaleString()}원`,
       change: "+8% 전일 대비",
@@ -17,16 +9,16 @@ const AdminStatsCards = ({ stats }) => {
       iconColor: "#10b981",
     },
     {
-      title: "활성 호텔",
-      value: stats?.activeHotels || 45,
+      title: "등록된 호텔",
+      value: stats?.totalHotels || stats?.activeHotels || 45,
       change: "+2 전일 대비",
       changeType: "positive",
       icon: "🏨",
       iconColor: "#8b5cf6",
     },
     {
-      title: "신규 회원",
-      value: stats?.newMembers || 8,
+      title: "전체 회원",
+      value: stats?.totalUsers || stats?.newMembers || 8,
       change: "+15% 전일 대비",
       changeType: "positive",
       icon: "👥",

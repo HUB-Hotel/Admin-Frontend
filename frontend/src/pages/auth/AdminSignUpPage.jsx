@@ -9,7 +9,6 @@ const AdminSignUpPage = () => {
     email: "",
     password: "",
     phone: "",
-    businessNumber: "",
   });
   const [confirmPassword, setConfirmPassword] = useState("");
   const [error, setError] = useState("");
@@ -37,13 +36,6 @@ const AdminSignUpPage = () => {
     // 비밀번호 길이 체크
     if (formData.password.length < 4) {
       setError("비밀번호는 4자 이상이어야 합니다.");
-      return;
-    }
-
-    // 사업자 등록번호 형식 체크 (XXX-XX-XXXXX)
-    const businessNumberPattern = /^\d{3}-\d{2}-\d{5}$/;
-    if (!businessNumberPattern.test(formData.businessNumber)) {
-      setError("사업자 등록번호 형식이 올바르지 않습니다. (예: 123-45-67890)");
       return;
     }
 
@@ -168,20 +160,6 @@ const AdminSignUpPage = () => {
               />
             </div>
 
-            <div className="form-group">
-              <label htmlFor="businessNumber">사업자 등록번호</label>
-              <input
-                type="text"
-                id="businessNumber"
-                name="businessNumber"
-                value={formData.businessNumber}
-                onChange={handleChange}
-                placeholder="123-45-67890"
-                required
-                pattern="\d{3}-\d{2}-\d{5}"
-              />
-            </div>
-
             <button
               type="submit"
               className="btn btn-primary btn-full"
@@ -210,15 +188,14 @@ const AdminSignUpPage = () => {
           <div className="success-modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="success-modal-icon">
               <svg width="64" height="64" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="12" cy="12" r="10" fill="#10b981" opacity="0.1"/>
+                <circle cx="12" cy="12" r="10" fill="#10b981" />
                 <path
                   d="M9 12l2 2 4-4"
-                  stroke="#10b981"
-                  strokeWidth="2"
+                  stroke="#ffffff"
+                  strokeWidth="2.5"
                   strokeLinecap="round"
                   strokeLinejoin="round"
                 />
-                <circle cx="12" cy="12" r="10" stroke="#10b981" strokeWidth="2"/>
               </svg>
             </div>
             <h2 className="success-modal-title">회원가입이 완료되었습니다!</h2>
@@ -228,8 +205,9 @@ const AdminSignUpPage = () => {
             </p>
             <button
               type="button"
-              className="btn btn-primary success-modal-button"
+              className="success-modal-button"
               onClick={handleSuccessConfirm}
+              style={{ backgroundColor: "#10b981" }}
             >
               확인
             </button>

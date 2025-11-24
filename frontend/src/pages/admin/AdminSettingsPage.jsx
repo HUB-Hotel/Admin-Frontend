@@ -1,6 +1,10 @@
+import { useState } from "react";
 import AdminSystemConfigForm from "../../components/admin/settings/AdminSystemConfigForm";
+import AlertModal from "../../components/common/AlertModal";
 
 const AdminSettingsPage = () => {
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "success" });
+
   const config = {
     siteName: "Hotel Booking",
     siteEmail: "admin@hotel.com",
@@ -12,9 +16,17 @@ const AdminSettingsPage = () => {
   const handleSubmit = async (formData) => {
     try {
       // TODO: API 연결
-      alert("설정이 저장되었습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: "설정이 저장되었습니다.",
+        type: "success",
+      });
     } catch (err) {
-      alert(err.message || "저장에 실패했습니다.");
+      setAlertModal({
+        isOpen: true,
+        message: err.message || "저장에 실패했습니다.",
+        type: "error",
+      });
     }
   };
 
@@ -26,6 +38,13 @@ const AdminSettingsPage = () => {
       </div>
 
       <AdminSystemConfigForm config={config} onSubmit={handleSubmit} />
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ ...alertModal, isOpen: false })}
+      />
     </div>
   );
 };

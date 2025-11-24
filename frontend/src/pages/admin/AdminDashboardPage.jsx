@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 import AdminStatsCards from "../../components/admin/dashboard/AdminStatsCards";
-import AdminChartArea from "../../components/admin/dashboard/AdminChartArea";
 import AdminRecentTable from "../../components/admin/dashboard/AdminRecentTable";
+import AdminRecentHotels from "../../components/admin/dashboard/AdminRecentHotels";
+import AdminRecentUsers from "../../components/admin/dashboard/AdminRecentUsers";
+import AdminRecentReviews from "../../components/admin/dashboard/AdminRecentReviews";
+import AdminQuickActions from "../../components/admin/dashboard/AdminQuickActions";
 import { adminStatsApi } from "../../api/adminStatsApi";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
@@ -38,13 +41,31 @@ const AdminDashboardPage = () => {
         <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "#0f172a" }}>대시보드</h2>
       </div>
 
+      {/* 통계 카드 */}
       <AdminStatsCards stats={stats} />
-      <AdminChartArea data={stats?.chartData} />
-      <AdminRecentTable
-        bookings={stats?.recentBookings || []}
-        users={stats?.recentUsers || []}
-        reviews={stats?.recentReviews || []}
-      />
+
+      {/* 빠른 작업 */}
+      <AdminQuickActions />
+
+      {/* 최근 활동 */}
+      <div style={{ marginBottom: "1.5rem" }}>
+        <AdminRecentTable
+          bookings={stats?.recentBookings || []}
+          users={stats?.recentUsers || []}
+          reviews={stats?.recentReviews || []}
+        />
+      </div>
+
+      {/* 최근 호텔과 최근 회원을 2열로 배치 */}
+      <div style={{ display: "grid", gridTemplateColumns: "repeat(2, 1fr)", gap: "1.5rem", marginBottom: "1.5rem" }}>
+        <AdminRecentHotels hotels={stats?.recentHotels || []} />
+        <AdminRecentUsers users={stats?.recentUsers || []} />
+      </div>
+
+      {/* 최근 리뷰를 전체 너비로 배치 */}
+      <div>
+        <AdminRecentReviews reviews={stats?.recentReviews || []} />
+      </div>
     </div>
   );
 };

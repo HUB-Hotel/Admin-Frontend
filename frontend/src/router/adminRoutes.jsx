@@ -7,8 +7,6 @@ import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
 import AdminHotelListPage from "../pages/admin/AdminHotelListPage";
 import AdminHotelCreatePage from "../pages/admin/AdminHotelCreatePage";
 import AdminHotelEditPage from "../pages/admin/AdminHotelEditPage";
-import AdminBookingListPage from "../pages/admin/AdminBookingListPage";
-import AdminBookingDetailPage from "../pages/admin/AdminBookingDetailPage";
 import AdminUserListPage from "../pages/admin/AdminUserListPage";
 import AdminUserDetailPage from "../pages/admin/AdminUserDetailPage";
 import AdminReviewListPage from "../pages/admin/AdminReviewListPage";
@@ -16,6 +14,7 @@ import AdminReviewDetailPage from "../pages/admin/AdminReviewDetailPage";
 import AdminCouponListPage from "../pages/admin/AdminCouponListPage";
 import AdminCouponCreatePage from "../pages/admin/AdminCouponCreatePage";
 import AdminCouponEditPage from "../pages/admin/AdminCouponEditPage";
+import AdminRevenuePage from "../pages/admin/AdminRevenuePage";
 import AdminSettingsPage from "../pages/admin/AdminSettingsPage";
 import AdminMyProfilePage from "../pages/admin/AdminMyProfilePage";
 
@@ -57,14 +56,6 @@ const adminRoutes = [
         element: <AdminHotelEditPage />,
       },
       {
-        path: "bookings",
-        element: <AdminBookingListPage />,
-      },
-      {
-        path: "bookings/:bookingId",
-        element: <AdminBookingDetailPage />,
-      },
-      {
         path: "users",
         element: <AdminUserListPage />,
       },
@@ -91,6 +82,10 @@ const adminRoutes = [
       {
         path: "coupons/:couponId/edit",
         element: <AdminCouponEditPage />,
+      },
+      {
+        path: "revenue",
+        element: <AdminRevenuePage />,
       },
       {
         path: "settings",
