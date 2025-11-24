@@ -1,5 +1,20 @@
-const StatusBadge = ({ status, type = "booking" }) => {
+const StatusBadge = ({ status, type = "booking", variant }) => {
   const getStatusConfig = () => {
+    // variant가 직접 제공된 경우 사용
+    if (variant) {
+      const variantMap = {
+        success: "badge-success",
+        warning: "badge-warning",
+        danger: "badge-danger",
+        info: "badge-info",
+        secondary: "badge-secondary",
+      };
+      return {
+        label: status,
+        className: variantMap[variant] || "badge-secondary",
+      };
+    }
+
     if (type === "booking") {
       const statusMap = {
         pending: { label: "대기", className: "badge-warning" },

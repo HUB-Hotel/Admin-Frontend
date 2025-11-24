@@ -17,12 +17,19 @@ const AdminHeader = () => {
   return (
     <header className="admin-header">
       <div className="admin-header-inner">
-        <div className="header-left">
-          <h2>관리자 대시보드</h2>
-        </div>
         <div className="header-right">
-          <span>{adminInfo?.name || "Admin"}</span>
-          <button onClick={handleLogout} className="btn btn-outline">
+          <span style={{ marginRight: "1rem", color: "#0f172a" }}>{adminInfo?.name || "관리자"}</span>
+          <button 
+            onClick={handleLogout} 
+            style={{ 
+              background: "transparent", 
+              border: "none", 
+              cursor: "pointer",
+              color: "#0f172a",
+              fontSize: "0.875rem",
+              padding: 0
+            }}
+          >
             로그아웃
           </button>
         </div>

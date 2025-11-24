@@ -15,8 +15,9 @@ const AdminMyProfilePage = () => {
 
   return (
     <div className="admin-my-profile-page">
-      <div className="page-header">
-        <h1>내 정보</h1>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem" }}>관리자 대시보드</h1>
+        <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "#0f172a" }}>내 정보</h2>
       </div>
 
       <AdminProfileForm profile={adminInfo} onSubmit={handleSubmit} />

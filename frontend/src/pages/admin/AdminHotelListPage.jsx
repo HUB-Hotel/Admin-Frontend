@@ -82,14 +82,17 @@ const AdminHotelListPage = () => {
 
   return (
     <div className="admin-hotel-list-page">
-      <div className="page-header">
-        <h1>호텔 관리</h1>
-        <button
-          onClick={() => navigate("/admin/hotels/new")}
-          className="btn btn-primary"
-        >
-          호텔 등록
-        </button>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem" }}>관리자 대시보드</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "#0f172a" }}>호텔 관리</h2>
+          <button
+            onClick={() => navigate("/admin/hotels/new")}
+            className="btn btn-primary"
+          >
+            호텔 등록
+          </button>
+        </div>
       </div>
 
       <AdminHotelFilter

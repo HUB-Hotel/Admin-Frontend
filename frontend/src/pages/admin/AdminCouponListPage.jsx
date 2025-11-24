@@ -42,14 +42,17 @@ const AdminCouponListPage = () => {
 
   return (
     <div className="admin-coupon-list-page">
-      <div className="page-header">
-        <h1>쿠폰 관리</h1>
-        <button
-          onClick={() => navigate("/admin/coupons/new")}
-          className="btn btn-primary"
-        >
-          쿠폰 생성
-        </button>
+      <div style={{ marginBottom: "1.5rem" }}>
+        <h1 style={{ fontSize: "1.5rem", fontWeight: 700, marginBottom: "0.5rem" }}>관리자 대시보드</h1>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+          <h2 style={{ fontSize: "1.25rem", fontWeight: 600, color: "#0f172a" }}>쿠폰 관리</h2>
+          <button
+            onClick={() => navigate("/admin/coupons/new")}
+            className="btn btn-primary"
+          >
+            쿠폰 생성
+          </button>
+        </div>
       </div>
 
       <AdminCouponTable coupons={coupons} onDelete={handleDelete} />
