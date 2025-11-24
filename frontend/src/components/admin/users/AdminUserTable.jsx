@@ -63,7 +63,7 @@ const AdminUserTable = ({ users = [], onStatusChange, onDelete }) => {
               <td>
                 <Link
                   to={`/admin/users/${user.id}`}
-                  style={{ color: "#2563eb", textDecoration: "underline" }}
+                  style={{ color: "#7FD8BE", textDecoration: "underline" }}
                 >
                   {user.name}
                 </Link>

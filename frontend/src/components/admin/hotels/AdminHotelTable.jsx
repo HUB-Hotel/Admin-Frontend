@@ -65,7 +65,7 @@ const AdminHotelTable = ({ hotels = [], onApprove, onReject, onDelete }) => {
               <td>
                 <Link
                   to={`/admin/hotels/${hotel.id}/edit`}
-                  style={{ color: "#2563eb", textDecoration: "underline" }}
+                  style={{ color: "#7FD8BE", textDecoration: "underline" }}
                 >
                   {hotel.name}
                 </Link>

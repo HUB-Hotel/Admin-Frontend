@@ -1,96 +1,276 @@
 @use "./variables.scss" as *;
 
-// 로그인 페이지
-.login-page {
+// Split 로그인 페이지
+.auth-split-page {
   display: flex;
-  justify-content: center;
-  align-items: center;
   min-height: 100vh;
   width: 100%;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 
-  .login-container {
+  .auth-split-form {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: $spacing-xl;
     background: $bg-primary;
-    padding: $spacing-2xl;
-    border-radius: $border-radius;
-    box-shadow: $shadow-lg;
+  }
+
+  .auth-form-container {
     width: 100%;
     max-width: 400px;
 
-    h2 {
-      text-align: center;
-      margin-bottom: $spacing-xl;
+    h1 {
+      font-size: $font-size-3xl;
+      font-weight: 700;
       color: $text-primary;
+      margin-bottom: $spacing-xs;
     }
 
-    .sample-account-info {
-      background: rgba(37, 99, 235, 0.1);
-      border: 1px solid rgba(37, 99, 235, 0.2);
-      border-radius: $border-radius;
-      padding: $spacing-md;
+    .auth-subtitle {
+      color: $text-secondary;
+      font-size: $font-size-sm;
       margin-bottom: $spacing-xl;
-      font-size: $font-size-sm;
-
-      p {
-        margin: $spacing-xs 0;
-        color: $text-secondary;
-
-        &:first-child {
-          font-weight: 600;
-          color: $primary-color;
-          margin-bottom: $spacing-sm;
-        }
-      }
     }
 
-    .success-message,
-    .error-message {
-      padding: $spacing-md;
-      border-radius: $border-radius;
-      margin-bottom: $spacing-md;
-      font-size: $font-size-sm;
-    }
-
-    .success-message {
-      background: rgba(16, 185, 129, 0.1);
-      color: $success-color;
-    }
-
-    .error-message {
+    .auth-error {
       background: rgba(239, 68, 68, 0.1);
       color: $danger-color;
+      padding: $spacing-md;
+      border-radius: $border-radius;
+      margin-bottom: $spacing-lg;
+      font-size: $font-size-sm;
     }
 
-    form {
-      .form-group {
-        margin-bottom: $spacing-lg;
+    .form-group {
+      margin-bottom: $spacing-lg;
 
-        label {
-          display: block;
-          margin-bottom: $spacing-sm;
-          font-weight: 500;
-        }
-
-        input {
-          width: 100%;
-          padding: $spacing-sm $spacing-md;
-          border: 1px solid $border-color;
-          border-radius: $border-radius;
-          font-size: $font-size-sm;
-
-          &:focus {
-            outline: none;
-            border-color: $primary-color;
-          }
-        }
+      label {
+        display: block;
+        margin-bottom: $spacing-sm;
+        font-weight: 500;
+        font-size: $font-size-sm;
       }
 
-      button[type="submit"] {
+      input {
         width: 100%;
-        padding: $spacing-md;
-        font-size: $font-size-base;
+        padding: $spacing-sm $spacing-md;
+        border: 1px solid $border-color;
+        border-radius: $border-radius;
+        font-size: $font-size-sm;
+
+        &:focus {
+          outline: none;
+          border-color: $primary-color;
+        }
       }
     }
+
+    .form-group-inline {
+      margin-bottom: $spacing-lg;
+
+      .checkbox-label {
+        display: flex;
+        align-items: center;
+        gap: $spacing-sm;
+        font-size: $font-size-sm;
+        cursor: pointer;
+
+        input[type="checkbox"] {
+          width: auto;
+        }
+      }
+    }
+
+    .btn-full {
+      width: 100%;
+      padding: $spacing-md;
+      background: $primary-color;
+      color: $text-white;
+      border: none;
+      border-radius: $border-radius;
+      font-size: $font-size-base;
+      font-weight: 500;
+      cursor: pointer;
+      transition: $transition-base;
+
+      &:hover {
+        opacity: 0.9;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+    }
+
+    .auth-links {
+      text-align: center;
+      margin-top: $spacing-md;
+
+      a {
+        color: $text-secondary;
+        font-size: $font-size-sm;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+    }
+
+    .auth-divider {
+      text-align: center;
+      margin: $spacing-lg 0;
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: $border-color;
+      }
+
+      span {
+        background: $bg-primary;
+        padding: 0 $spacing-md;
+        position: relative;
+        color: $text-secondary;
+        font-size: $font-size-sm;
+      }
+    }
+
+    .social-login {
+      display: flex;
+      justify-content: center;
+      gap: $spacing-md;
+
+      .social-btn {
+        width: 48px;
+        height: 48px;
+        border-radius: 50%;
+        border: 1px solid $border-color;
+        background: $bg-primary;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        transition: $transition-base;
+        color: $text-secondary;
+
+        &:hover {
+          border-color: $primary-color;
+          color: $primary-color;
+        }
+
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
+        }
+      }
+    }
+  }
+
+  .auth-split-image {
+    flex: 1;
+    display: none;
+
+    @media (min-width: 768px) {
+      display: block;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+}
+
+// 성공 모달
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease-in-out;
+
+  .success-modal-content {
+    background: $bg-primary;
+    padding: $spacing-2xl;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: slideUp 0.3s ease-out;
+
+    .success-modal-icon {
+      margin-bottom: $spacing-lg;
+      display: flex;
+      justify-content: center;
+      animation: scaleIn 0.3s ease-out 0.1s both;
+    }
+
+    .success-modal-title {
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    .success-modal-message {
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      line-height: 1.6;
+      margin-bottom: $spacing-xl;
+    }
+
+    .success-modal-button {
+      width: 100%;
+      padding: $spacing-md;
+      font-size: $font-size-base;
+      font-weight: 600;
+      border-radius: 8px;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
   }
 }
 
@@ -314,6 +494,20 @@
     .label {
       width: 100%;
       margin-bottom: $spacing-xs;
+    }
+  }
+
+  .auth-split-page {
+    flex-direction: column;
+
+    .auth-split-form {
+      width: 100%;
+      padding: $spacing-xl;
+    }
+
+    .auth-split-image {
+      width: 100%;
+      height: 300px;
     }
   }
 }

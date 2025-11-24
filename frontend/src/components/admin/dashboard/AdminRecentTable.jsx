@@ -54,7 +54,7 @@ const AdminRecentTable = ({ bookings = [] }) => {
                 <td>
                   <Link
                     to={`/admin/bookings/${booking.id}`}
-                    style={{ color: "#2563eb", textDecoration: "underline" }}
+                    style={{ color: "#7FD8BE", textDecoration: "underline" }}
                   >
                     {booking.id}
                   </Link>
