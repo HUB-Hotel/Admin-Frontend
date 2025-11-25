@@ -163,11 +163,19 @@
           border-color: $primary-color;
           color: $primary-color;
         }
+      }
+    }
 
-        &:disabled {
-          opacity: 0.5;
-          cursor: not-allowed;
-        }
+    .auth-test-account {
+      margin-top: $spacing-lg;
+      padding: $spacing-md;
+      background: $bg-secondary;
+      border-radius: $border-radius;
+      font-size: $font-size-sm;
+      color: $text-secondary;
+
+      p {
+        margin: $spacing-xs 0;
       }
     }
   }
@@ -188,177 +196,97 @@
   }
 }
 
-// 성공 모달 (custom-modal 스타일과 동일하게 통일)
-.success-modal-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(4px);
+// 로그인 페이지
+.login-page {
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 2000;
-  animation: fadeIn 0.2s ease-in-out;
+  min-height: 100vh;
+  width: 100%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 
-  .success-modal-content {
+  .login-container {
     background: $bg-primary;
     padding: $spacing-2xl;
-    border-radius: 20px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-    animation: slideUp 0.3s ease-out;
+    border-radius: $border-radius;
+    box-shadow: $shadow-lg;
+    width: 100%;
+    max-width: 400px;
 
-    .success-modal-icon {
-      display: flex;
-      justify-content: center;
-      margin-bottom: $spacing-lg;
-      animation: scaleIn 0.3s ease-out 0.1s both;
-
-      svg {
-        display: block;
-      }
-    }
-
-    .success-modal-title {
-      font-size: $font-size-xl;
-      font-weight: 700;
-      color: $text-primary;
-      margin: 0 0 $spacing-md 0;
-    }
-
-    .success-modal-message {
-      color: $text-secondary;
-      font-size: $font-size-base;
-      line-height: 1.6;
+    h2 {
+      text-align: center;
       margin-bottom: $spacing-xl;
-      white-space: pre-line;
+      color: $text-primary;
     }
 
-    .success-modal-button {
-      min-width: 120px;
-      padding: $spacing-md $spacing-xl;
-      font-size: $font-size-base;
-      font-weight: 600;
-      border-radius: 12px;
-      border: none;
-      color: #ffffff;
-      cursor: pointer;
-      transition: all 0.2s ease;
+    .sample-account-info {
+      background: rgba(37, 99, 235, 0.1);
+      border: 1px solid rgba(37, 99, 235, 0.2);
+      border-radius: $border-radius;
+      padding: $spacing-md;
+      margin-bottom: $spacing-xl;
+      font-size: $font-size-sm;
 
-      &:hover {
-        opacity: 0.9;
-        transform: translateY(-1px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-      }
+      p {
+        margin: $spacing-xs 0;
+        color: $text-secondary;
 
-      &:active {
-        transform: translateY(0);
+        &:first-child {
+          font-weight: 600;
+          color: $primary-color;
+          margin-bottom: $spacing-sm;
+        }
       }
     }
-  }
-}
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+    .success-message,
+    .error-message {
+      padding: $spacing-md;
+      border-radius: $border-radius;
+      margin-bottom: $spacing-md;
+      font-size: $font-size-sm;
+    }
 
-@keyframes slideUp {
-  from {
-    transform: translateY(20px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
-}
+    .success-message {
+      background: rgba(16, 185, 129, 0.1);
+      color: $success-color;
+    }
 
-@keyframes scaleIn {
-  from {
-    transform: scale(0);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
-}
+    .error-message {
+      background: rgba(239, 68, 68, 0.1);
+      color: $danger-color;
+    }
 
-// 로더
-.loader {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: $spacing-xl;
+    form {
+      .form-group {
+        margin-bottom: $spacing-lg;
 
-  .spinner {
-    border: 3px solid rgba(0, 0, 0, 0.1);
-    border-top: 3px solid $primary-color;
-    border-radius: 50%;
-    animation: spin 1s linear infinite;
-  }
+        label {
+          display: block;
+          margin-bottom: $spacing-sm;
+          font-weight: 500;
+        }
 
-  &.loader-small .spinner {
-    width: 20px;
-    height: 20px;
-  }
+        input {
+          width: 100%;
+          padding: $spacing-sm $spacing-md;
+          border: 1px solid $border-color;
+          border-radius: $border-radius;
+          font-size: $font-size-sm;
 
-  &.loader-medium .spinner {
-    width: 40px;
-    height: 40px;
-  }
+          &:focus {
+            outline: none;
+            border-color: $primary-color;
+          }
+        }
+      }
 
-  &.loader-large .spinner {
-    width: 60px;
-    height: 60px;
-  }
-}
-
-.loader-fullscreen {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.9);
-  z-index: 9999;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
-
-// 에러 메시지
-.error-message {
-  text-align: center;
-  padding: $spacing-xl;
-
-  .error-icon {
-    font-size: 48px;
-    margin-bottom: $spacing-md;
-  }
-
-  p {
-    color: $text-secondary;
-    margin-bottom: $spacing-lg;
+      button[type="submit"] {
+        width: 100%;
+        padding: $spacing-md;
+        font-size: $font-size-base;
+      }
+    }
   }
 }
 
@@ -507,6 +435,92 @@
   }
 }
 
+// 성공 모달
+.success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+  animation: fadeIn 0.2s ease-in-out;
+
+  .success-modal-content {
+    background: $bg-primary;
+    padding: $spacing-2xl;
+    border-radius: 20px;
+    max-width: 420px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+    animation: slideUp 0.3s ease-out;
+
+    .success-modal-icon {
+      margin-bottom: $spacing-lg;
+      display: flex;
+      justify-content: center;
+      animation: scaleIn 0.3s ease-out 0.1s both;
+    }
+
+    .success-modal-title {
+      font-size: $font-size-xl;
+      font-weight: 700;
+      color: $text-primary;
+      margin-bottom: $spacing-md;
+    }
+
+    .success-modal-message {
+      color: $text-secondary;
+      font-size: $font-size-sm;
+      line-height: 1.6;
+      margin-bottom: $spacing-xl;
+    }
+
+    .success-modal-button {
+      width: 100%;
+      padding: $spacing-md;
+      font-size: $font-size-base;
+      font-weight: 600;
+      border-radius: 8px;
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    transform: scale(0);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 // 디테일 섹션
 .detail-section {
   .detail-row {
@@ -529,61 +543,178 @@
       color: $text-secondary;
     }
   }
+
+  .detail-actions {
+    display: flex;
+    gap: $spacing-sm;
+    margin-top: $spacing-lg;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-color;
+  }
 }
 
-// 최근 섹션
-.recent-section {
-  margin-bottom: $spacing-xl;
-
+// 폼
+.form {
   h4 {
     margin-bottom: $spacing-md;
+    padding-bottom: $spacing-sm;
+    border-bottom: 1px solid $border-color;
     color: $text-primary;
+
+    &:not(:first-child) {
+      margin-top: $spacing-xl;
+    }
   }
-}
 
-// 차트 플레이스홀더
-.chart-placeholder {
-  padding: $spacing-2xl;
-  text-align: center;
-  background: $bg-secondary;
-  border-radius: $border-radius;
-  color: $text-secondary;
-
-  p {
-    margin-bottom: $spacing-sm;
+  .form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: $spacing-sm;
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-color;
   }
-}
 
-// Breadcrumb
-.breadcrumb {
-  padding: $spacing-md 0;
-  font-size: $font-size-sm;
-  color: $text-secondary;
+  textarea {
+    width: 100%;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    font-size: $font-size-sm;
+    font-family: inherit;
+    resize: vertical;
 
-  a {
-    color: $primary-color;
-    text-decoration: none;
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+    }
+  }
+
+  .facility-selector {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: $spacing-sm;
+    margin-top: $spacing-sm;
+  }
+
+  .facility-item {
+    display: flex;
+    align-items: center;
+    gap: $spacing-sm;
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid rgba(15, 23, 42, 0.15);
+    border-radius: 16px;
+    background: $bg-primary;
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    font-weight: 500;
+    cursor: pointer;
+    transition: $transition-base;
+
+    .facility-icon {
+      font-size: 18px;
+    }
+
+    &.selected {
+      border-color: $primary-color;
+      background: rgba(99, 102, 241, 0.08);
+      color: $primary-color;
+      box-shadow: 0 6px 18px rgba(99, 102, 241, 0.12);
+    }
 
     &:hover {
-      text-decoration: underline;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// 리뷰 상세
+.review-detail {
+  .rating {
+    color: $warning-color;
+  }
+
+  .reply-form {
+    margin-top: $spacing-xl;
+    padding-top: $spacing-lg;
+    border-top: 1px solid $border-color;
+
+    h4 {
+      margin-bottom: $spacing-md;
+    }
+
+    textarea {
+      width: 100%;
+      margin-bottom: $spacing-md;
+    }
+  }
+}
+
+// 페이지네이션
+.pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: $spacing-xs;
+  margin-top: $spacing-xl;
+
+  button {
+    padding: $spacing-sm $spacing-md;
+    border: 1px solid $border-color;
+    background: $bg-primary;
+    color: $text-primary;
+    border-radius: $border-radius;
+    cursor: pointer;
+    transition: $transition-base;
+    font-size: $font-size-sm;
+
+    &:hover:not(:disabled) {
+      background: $bg-secondary;
+    }
+
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    &.active {
+      background: $primary-color;
+      color: $text-white;
+      border-color: $primary-color;
+    }
+  }
+}
+
+// 필터
+.filter-bar {
+  display: flex;
+  gap: $spacing-md;
+  margin-bottom: $spacing-lg;
+  flex-wrap: wrap;
+
+  .filter-group {
+    display: flex;
+    gap: $spacing-sm;
+    align-items: center;
+
+    label {
+      font-size: $font-size-sm;
+      font-weight: 500;
+      color: $text-primary;
+    }
+
+    input,
+    select {
+      padding: $spacing-sm $spacing-md;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+      font-size: $font-size-sm;
     }
   }
 }
 
 // 반응형
 @media (max-width: 768px) {
-  .admin-layout {
-    .admin-sidebar {
-      width: 100%;
-      position: relative;
-      height: auto;
-    }
-
-    .admin-main {
-      margin-left: 0;
-    }
-  }
-
   .stats-cards {
     grid-template-columns: 1fr;
   }
@@ -606,20 +737,6 @@
     .label {
       width: 100%;
       margin-bottom: $spacing-xs;
-    }
-  }
-
-  .auth-split-page {
-    flex-direction: column;
-
-    .auth-split-form {
-      width: 100%;
-      padding: $spacing-xl;
-    }
-
-    .auth-split-image {
-      width: 100%;
-      height: 300px;
     }
   }
 }

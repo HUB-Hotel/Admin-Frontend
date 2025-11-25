@@ -81,15 +81,13 @@ const AdminHotelTable = ({ hotels = [], onApprove, onReject, onDelete }) => {
                   {hotel.status === "승인대기" && (
                     <>
                       <button
-                        className="btn btn-primary"
-                        style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}
+                        className="btn btn-primary btn-action"
                         onClick={() => onApprove && onApprove(hotel.id)}
                       >
                         승인
                       </button>
                       <button
-                        className="btn btn-outline"
-                        style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}
+                        className="btn btn-outline btn-action"
                         onClick={() => onReject && onReject(hotel.id)}
                       >
                         거부
@@ -97,8 +95,7 @@ const AdminHotelTable = ({ hotels = [], onApprove, onReject, onDelete }) => {
                     </>
                   )}
                   <button
-                    className="btn btn-danger"
-                    style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}
+                    className="btn btn-danger btn-action"
                     onClick={() => onDelete && onDelete(hotel.id)}
                   >
                     삭제

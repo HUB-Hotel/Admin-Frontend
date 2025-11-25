@@ -77,21 +77,15 @@ const AdminUserTable = ({ users = [], onStatusChange, onDelete }) => {
               <td>
                 <div style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}>
                   <select
+                    className="select-action"
                     value={user.status}
                     onChange={(e) => onStatusChange && onStatusChange(user.id, e.target.value)}
-                    style={{
-                      padding: "0.25rem 0.5rem",
-                      fontSize: "0.75rem",
-                      border: "1px solid #e2e8f0",
-                      borderRadius: "4px",
-                    }}
                   >
                     <option value="활성">활성</option>
                     <option value="비활성">비활성</option>
                   </select>
                   <button
-                    className="btn btn-danger"
-                    style={{ fontSize: "0.75rem", padding: "0.25rem 0.5rem" }}
+                    className="btn btn-danger btn-action"
                     onClick={() => onDelete && onDelete(user.id)}
                   >
                     삭제

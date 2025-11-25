@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { HotelIcon, CouponIcon, SettingsIcon } from "../../layout/AdminSidebar";
 
 const AdminQuickActions = () => {
   const quickActions = [
@@ -6,21 +7,21 @@ const AdminQuickActions = () => {
       title: "호텔 관리",
       description: "호텔을 등록하고 관리합니다",
       link: "/admin/hotels",
-      icon: "🏨",
+      icon: <HotelIcon />,
       color: "#7FD8BE",
     },
     {
       title: "쿠폰 관리",
       description: "쿠폰을 생성하고 관리합니다",
       link: "/admin/coupons",
-      icon: "🎫",
+      icon: <CouponIcon />,
       color: "#f59e0b",
     },
     {
       title: "시스템 설정",
       description: "시스템 설정을 관리합니다",
       link: "/admin/settings",
-      icon: "⚙️",
+      icon: <SettingsIcon />,
       color: "#64748b",
     },
   ];
@@ -56,6 +57,7 @@ const AdminQuickActions = () => {
           >
             <div style={{ display: "flex", alignItems: "center", gap: "1rem", marginBottom: "0.5rem" }}>
               <div
+                className="action-icon"
                 style={{
                   width: "48px",
                   height: "48px",
@@ -64,7 +66,7 @@ const AdminQuickActions = () => {
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  fontSize: "1.5rem",
+                  color: action.color,
                 }}
               >
                 {action.icon}

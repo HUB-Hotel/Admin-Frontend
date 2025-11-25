@@ -14,6 +14,11 @@ body {
   line-height: 1.5;
 }
 
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
 // 레이아웃 공통
 .container {
   width: 100%;
@@ -33,6 +38,12 @@ body {
     font-weight: 700;
     color: $text-primary;
   }
+
+  p {
+    color: $text-secondary;
+    font-size: $font-size-sm;
+    margin-top: $spacing-xs;
+  }
 }
 
 // 카드
@@ -43,6 +54,16 @@ body {
   padding: $spacing-lg;
   margin-bottom: $spacing-lg;
   border: 1px solid $border-color;
+
+  &__header {
+    margin-bottom: $spacing-md;
+
+    h3 {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: $text-primary;
+    }
+  }
 }
 
 // 버튼
@@ -168,7 +189,7 @@ table {
     &:focus {
       outline: none;
       border-color: $primary-color;
-      box-shadow: 0 0 0 3px rgba(127, 216, 190, 0.1);
+      box-shadow: 0 0 0 3px rgba(127, 216, 190, 0.2);
     }
 
     &:disabled {
@@ -188,3 +209,38 @@ table {
     margin-top: $spacing-xs;
   }
 }
+
+// 상태 배지
+.status-badge {
+  display: inline-block;
+  padding: $spacing-xs $spacing-sm;
+  border-radius: $border-radius;
+  font-size: $font-size-xs;
+  font-weight: 500;
+
+  &.confirmed {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: $success-color;
+  }
+
+  &.pending {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: $warning-color;
+  }
+
+  &.cancelled {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: $danger-color;
+  }
+
+  &.approved {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: $success-color;
+  }
+
+  &.reported {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: $danger-color;
+  }
+}
+

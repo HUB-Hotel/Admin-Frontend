@@ -1,3 +1,5 @@
+import { RevenueIcon, HotelIcon, UserIcon } from "../../layout/AdminSidebar";
+
 const AdminStatsCards = ({ stats }) => {
   const statCards = [
     {
@@ -5,7 +7,7 @@ const AdminStatsCards = ({ stats }) => {
       value: `${(stats?.totalRevenue || 12500000).toLocaleString()}원`,
       change: "+8% 전일 대비",
       changeType: "positive",
-      icon: "💰",
+      icon: <RevenueIcon />,
       iconColor: "#10b981",
     },
     {
@@ -13,7 +15,7 @@ const AdminStatsCards = ({ stats }) => {
       value: stats?.totalHotels || stats?.activeHotels || 45,
       change: "+2 전일 대비",
       changeType: "positive",
-      icon: "🏨",
+      icon: <HotelIcon />,
       iconColor: "#8b5cf6",
     },
     {
@@ -21,7 +23,7 @@ const AdminStatsCards = ({ stats }) => {
       value: stats?.totalUsers || stats?.newMembers || 8,
       change: "+15% 전일 대비",
       changeType: "positive",
-      icon: "👥",
+      icon: <UserIcon />,
       iconColor: "#f59e0b",
     },
   ];
@@ -34,7 +36,7 @@ const AdminStatsCards = ({ stats }) => {
             <span className="stat-title">{card.title}</span>
             <div
               className="stat-icon"
-              style={{ backgroundColor: `${card.iconColor}20` }}
+              style={{ backgroundColor: `${card.iconColor}20`, color: card.iconColor }}
             >
               {card.icon}
             </div>
