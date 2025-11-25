@@ -335,6 +335,7 @@ export const mockBusinessOwners = [
 
 // Mock 통계 데이터
 export const mockStats = {
+  totalRevenue: 4568000000, // 총 누적 매출 (전체 기간)
   today: {
     bookings: 12,
     revenue: 4560000,
@@ -406,4 +407,32 @@ export const mockStats = {
     previous: 31600000,
     yoyChange: 0.12,
   },
+  hotels: [
+    {
+      id: "hotel-1",
+      name: "그랜드 서울 호텔",
+      city: "서울",
+      totalRevenue: 2800000000,
+      thisMonthRevenue: 52000000,
+      thisYearRevenue: 560000000,
+      bookings: 156,
+      change: {
+        revenue: 0.08,
+        bookings: 0.05,
+      },
+    },
+    {
+      id: "hotel-2",
+      name: "부산 해변 리조트",
+      city: "부산",
+      totalRevenue: 1768000000,
+      thisMonthRevenue: 26920000,
+      thisYearRevenue: 332340000,
+      bookings: 78,
+      change: {
+        revenue: 0.12,
+        bookings: 0.08,
+      },
+    },
+  ],
 };

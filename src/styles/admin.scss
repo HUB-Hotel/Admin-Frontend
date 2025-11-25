@@ -851,10 +851,25 @@
     &__header {
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: flex-start;
       font-size: $font-size-sm;
       color: $text-secondary;
       margin-bottom: $spacing-sm;
+      position: relative;
+    }
+
+    &__subtitle {
+      display: block;
+      font-size: $font-size-xs;
+      color: $text-tertiary;
+      margin-top: 4px;
+    }
+
+    &__icon {
+      font-size: $font-size-lg;
+      position: absolute;
+      top: 0;
+      right: 0;
     }
 
     &__value {
@@ -866,6 +881,225 @@
     .delta {
       font-size: $font-size-xs;
       font-weight: 600;
+
+      &.positive {
+        color: $success-color;
+      }
+
+      &.negative {
+        color: $danger-color;
+      }
+    }
+  }
+
+  .stats-detail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+  }
+
+  .detail-card {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: $spacing-md;
+    background: $bg-primary;
+    transition: $transition-base;
+
+    &:hover {
+      box-shadow: $shadow-sm;
+      border-color: $primary-color;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__title {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      font-weight: 500;
+    }
+
+    &__value {
+      font-size: $font-size-lg;
+      font-weight: 700;
+      color: $text-primary;
+      margin-bottom: $spacing-xs;
+    }
+
+    &__subtitle {
+      font-size: $font-size-xs;
+      color: $text-tertiary;
+    }
+
+    .delta {
+      font-size: $font-size-xs;
+      font-weight: 600;
+
+      &.positive {
+        color: $success-color;
+      }
+
+      &.negative {
+        color: $danger-color;
+      }
+    }
+  }
+
+  .room-type-distribution {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+    margin-top: $spacing-lg;
+  }
+
+  .room-type-item {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: $spacing-md;
+    background: $bg-primary;
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: $spacing-sm;
+    }
+
+    &__name {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    &__percentage {
+      font-size: $font-size-sm;
+      font-weight: 600;
+      color: $primary-color;
+    }
+
+    &__details {
+      display: flex;
+      gap: $spacing-lg;
+      margin-bottom: $spacing-sm;
+      font-size: $font-size-sm;
+
+      .label {
+        color: $text-secondary;
+        margin-right: $spacing-xs;
+      }
+
+      .value {
+        color: $text-primary;
+        font-weight: 600;
+      }
+    }
+
+    &__bar {
+      height: 8px;
+      background: $bg-secondary;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    &__bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, $primary-color, color.scale($primary-color, $lightness: 10%));
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .hotel-revenue-list {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-lg;
+    margin-top: $spacing-lg;
+  }
+
+  .hotel-revenue-item {
+    border: 1px solid $border-color;
+    border-radius: $border-radius;
+    padding: $spacing-lg;
+    background: $bg-primary;
+    transition: $transition-base;
+
+    &:hover {
+      box-shadow: $shadow-sm;
+      border-color: $primary-color;
+    }
+
+    &__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: $spacing-md;
+    }
+
+    &__name {
+      font-size: $font-size-lg;
+      font-weight: 600;
+      color: $text-primary;
+      margin-bottom: $spacing-xs;
+    }
+
+    &__location {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+    }
+
+    &__percentage {
+      font-size: $font-size-lg;
+      font-weight: 700;
+      color: $primary-color;
+    }
+
+    &__stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: $spacing-md;
+      margin-bottom: $spacing-md;
+    }
+
+    &__bar {
+      height: 8px;
+      background: $bg-secondary;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+
+    &__bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, $primary-color, color.scale($primary-color, $lightness: 10%));
+      border-radius: 9999px;
+      transition: width 0.3s ease;
+    }
+  }
+
+  .hotel-revenue-stat {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-xs;
+
+    &__label {
+      font-size: $font-size-xs;
+      color: $text-secondary;
+    }
+
+    &__value {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    &__delta {
+      font-size: $font-size-xs;
+      font-weight: 600;
+      margin-top: 2px;
 
       &.positive {
         color: $success-color;
