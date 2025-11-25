@@ -5,11 +5,10 @@ import AdminSignupPage from "../pages/auth/AdminSignupPage";
 import AdminForgotPasswordPage from "../pages/auth/AdminForgotPasswordPage";
 import AdminKakaoCompletePage from "../pages/auth/AdminKakaoCompletePage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
-import AdminBookingListPage from "../pages/admin/AdminBookingListPage";
-import AdminBookingDetailPage from "../pages/admin/AdminBookingDetailPage";
-import AdminRoomListPage from "../pages/admin/AdminRoomListPage";
-import AdminRoomCreatePage from "../pages/admin/AdminRoomCreatePage";
-import AdminRoomEditPage from "../pages/admin/AdminRoomEditPage";
+import AdminCouponListPage from "../pages/admin/AdminCouponListPage";
+import AdminCouponCreatePage from "../pages/admin/AdminCouponCreatePage";
+import AdminCouponEditPage from "../pages/admin/AdminCouponEditPage";
+import AdminBusinessManagementPage from "../pages/admin/AdminBusinessManagementPage";
 import AdminStatisticsPage from "../pages/admin/AdminStatisticsPage";
 import AdminReviewListPage from "../pages/admin/AdminReviewListPage";
 import AdminReviewDetailPage from "../pages/admin/AdminReviewDetailPage";
@@ -46,24 +45,20 @@ const adminRoutes = [
         element: <AdminDashboardPage />,
       },
       {
-        path: "bookings",
-        element: <AdminBookingListPage />,
+        path: "coupons",
+        element: <AdminCouponListPage />,
       },
       {
-        path: "bookings/:id",
-        element: <AdminBookingDetailPage />,
+        path: "coupons/create",
+        element: <AdminCouponCreatePage />,
       },
       {
-        path: "rooms",
-        element: <AdminRoomListPage />,
+        path: "coupons/:id/edit",
+        element: <AdminCouponEditPage />,
       },
       {
-        path: "rooms/create",
-        element: <AdminRoomCreatePage />,
-      },
-      {
-        path: "rooms/:id/edit",
-        element: <AdminRoomEditPage />,
+        path: "owners",
+        element: <AdminBusinessManagementPage />,
       },
       {
         path: "statistics",

@@ -7,17 +7,12 @@ const AdminStatsCards = ({ stats }) => {
     return new Intl.NumberFormat("ko-KR").format(amount);
   };
 
+  const formatNumber = (value) => {
+    return new Intl.NumberFormat("ko-KR").format(value);
+  };
+
   return (
     <div className="stats-cards">
-      <div className="stat-card">
-        <div className="stat-card-header">
-          <p className="stat-label">오늘 예약</p>
-          <span className="stat-icon icon-calendar">📅</span>
-        </div>
-        <p className="stat-value">{hotel.todayBookings || 15}</p>
-        <p className="stat-change positive">+12% 전월 대비</p>
-      </div>
-
       <div className="stat-card">
         <div className="stat-card-header">
           <p className="stat-label">총 매출</p>
@@ -29,20 +24,29 @@ const AdminStatsCards = ({ stats }) => {
 
       <div className="stat-card">
         <div className="stat-card-header">
-          <p className="stat-label">활성 객실</p>
-          <span className="stat-icon icon-hotel">🏨</span>
+          <p className="stat-label">총 회원</p>
+          <span className="stat-icon icon-users">👥</span>
         </div>
-        <p className="stat-value">{hotel.totalRooms}</p>
-        <p className="stat-change positive">+2 전월 대비</p>
+        <p className="stat-value">{formatNumber(hotel.totalMembers || 0)}명</p>
+        <p className="stat-change positive">신규 가입 {formatNumber(hotel.newMembers || 0)}명/월</p>
       </div>
 
       <div className="stat-card">
         <div className="stat-card-header">
-          <p className="stat-label">신규 회원</p>
-          <span className="stat-icon icon-user">👤</span>
+          <p className="stat-label">활성 객실</p>
+          <span className="stat-icon icon-hotel">🏨</span>
         </div>
-        <p className="stat-value">{hotel.newMembers || 8}</p>
-        <p className="stat-change positive">+15% 전월 대비</p>
+        <p className="stat-value">{hotel.totalRooms}개</p>
+        <p className="stat-change positive">평균 평점 {hotel.avgRating || 4.5}</p>
+      </div>
+
+      <div className="stat-card">
+        <div className="stat-card-header">
+          <p className="stat-label">총 리뷰</p>
+          <span className="stat-icon icon-review">⭐</span>
+        </div>
+        <p className="stat-value">{hotel.totalReviews || 128}개</p>
+        <p className="stat-change positive">평균 {hotel.avgRating || 4.5}점</p>
       </div>
     </div>
   );

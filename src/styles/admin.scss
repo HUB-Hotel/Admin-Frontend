@@ -359,6 +359,167 @@
   }
 }
 
+.business-hotel-management-page {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xl;
+
+    .page-actions {
+      display: flex;
+      gap: $spacing-sm;
+    }
+  }
+
+  .hotel-info-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: $spacing-lg;
+    margin-bottom: $spacing-lg;
+
+    @media (max-width: 1024px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .hotel-details {
+    list-style: none;
+    padding: 0;
+    margin: $spacing-md 0;
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-md;
+
+    li {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-xs;
+
+      span {
+        font-size: $font-size-xs;
+        color: $text-secondary;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
+
+      p {
+        font-size: $font-size-base;
+        color: $text-primary;
+      }
+    }
+  }
+
+  .hotel-name {
+    font-size: $font-size-xl;
+    font-weight: 700;
+    margin-bottom: $spacing-sm;
+  }
+
+  .hotel-description {
+    color: $text-secondary;
+    line-height: 1.5;
+  }
+
+  .amenities-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: $spacing-sm;
+  }
+
+  .amenity-chip {
+    padding: $spacing-xs $spacing-sm;
+    border-radius: 999px;
+    border: 1px solid $border-color;
+    background: $bg-secondary;
+    font-size: $font-size-xs;
+  }
+
+  .info-banner {
+    margin-top: $spacing-lg;
+    padding: $spacing-md;
+    border-radius: $border-radius;
+    background: rgba($primary-color, 0.08);
+    color: $text-primary;
+    font-size: $font-size-sm;
+  }
+}
+
+.business-owner-management-page {
+  .page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: $spacing-xl;
+
+    .page-actions {
+      display: flex;
+      gap: $spacing-sm;
+    }
+  }
+
+  .owner-name {
+    font-weight: 600;
+    color: $text-primary;
+  }
+
+  .owner-meta {
+    font-size: $font-size-xs;
+    color: $text-secondary;
+  }
+
+  .owner-filter {
+    gap: $spacing-md;
+    flex-wrap: wrap;
+
+    .filter-group {
+      min-width: 200px;
+    }
+
+    .filter-group.grow {
+      flex: 1;
+      min-width: 240px;
+    }
+  }
+
+  .hotel-status {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: $font-size-xs;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+
+    &.operating {
+      background: rgba($success-color, 0.1);
+      color: $success-color;
+    }
+
+    &.review {
+      background: rgba($warning-color, 0.15);
+      color: $warning-color;
+    }
+
+    &.suspended {
+      background: rgba($danger-color, 0.15);
+      color: $danger-color;
+    }
+  }
+
+  .risk-indicator {
+    font-weight: 600;
+
+    &.success {
+      color: $success-color;
+    }
+
+    &.danger {
+      color: $danger-color;
+    }
+  }
+}
+
 // 차트 섹션
 .chart-section {
   background: $bg-primary;

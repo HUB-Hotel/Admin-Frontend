@@ -13,7 +13,7 @@ import {
 const FALLBACK_CHART = {
   labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
   revenue: [2000000, 2500000, 2200000, 2800000, 3000000, 3200000],
-  bookings: [45, 58, 52, 67, 72, 78],
+  couponUsage: [120, 145, 132, 168, 185, 198],
 };
 
 const AdminChartArea = ({ data }) => {
@@ -24,23 +24,23 @@ const AdminChartArea = ({ data }) => {
 
   const labels = data?.labels?.length ? data.labels : FALLBACK_CHART.labels;
   const revenues = data?.revenue?.length ? data.revenue : FALLBACK_CHART.revenue;
-  const bookings = data?.bookings?.length ? data.bookings : FALLBACK_CHART.bookings;
+  const couponUsage = data?.couponUsage?.length ? data.couponUsage : FALLBACK_CHART.couponUsage;
 
   const chartData = labels.map((label, index) => ({
     month: label,
     revenue:
       revenues[index] ??
       FALLBACK_CHART.revenue[index % FALLBACK_CHART.revenue.length],
-    bookings:
-      bookings[index] ??
-      FALLBACK_CHART.bookings[index % FALLBACK_CHART.bookings.length],
+    couponUsage:
+      couponUsage[index] ??
+      FALLBACK_CHART.couponUsage[index % FALLBACK_CHART.couponUsage.length],
   }));
 
   return (
     <div className="chart-section">
       <div className="chart-header">
-        <h2>매출 추이</h2>
-        <p className="chart-subtitle">최근 6개월 매출과 예약 수</p>
+        <h2>매출 및 쿠폰 사용 추이</h2>
+        <p className="chart-subtitle">최근 6개월 매출과 쿠폰 사용량</p>
       </div>
       <div className="chart-wrapper">
         <ResponsiveContainer width="100%" height={320}>
@@ -76,8 +76,8 @@ const AdminChartArea = ({ data }) => {
             <Line
               yAxisId="right"
               type="monotone"
-              dataKey="bookings"
-              name="예약 수"
+              dataKey="couponUsage"
+              name="쿠폰 사용량"
               stroke="#F97316"
               strokeWidth={2}
               dot={{ r: 4 }}

@@ -5,6 +5,8 @@ import {
   mockBookings,
   mockReviews,
   mockStats,
+  mockCoupons,
+  mockBusinessOwners,
 } from "./mockData";
 
 // API 지연 시뮬레이션
@@ -232,6 +234,64 @@ export const mockHotelApi = {
   },
 };
 
+// Mock 사업자/호텔 관리 API
+export const mockBusinessApi = {
+  getOwners: async (params = {}) => {
+    await delay();
+    let filtered = [...mockBusinessOwners];
+
+    if (params.status && params.status !== "all") {
+      filtered = filtered.filter((owner) => owner.status === params.status);
+    }
+
+    if (params.search) {
+      const keyword = params.search.toLowerCase();
+      filtered = filtered.filter(
+        (owner) =>
+          owner.name.toLowerCase().includes(keyword) ||
+          owner.email.toLowerCase().includes(keyword) ||
+          owner.hotels.some((hotel) => hotel.name.toLowerCase().includes(keyword))
+      );
+    }
+
+    const summary = {
+      totalOwners: mockBusinessOwners.length,
+      activeOwners: mockBusinessOwners.filter((o) => o.status === "active").length,
+      pendingOwners: mockBusinessOwners.filter((o) => o.status === "pending").length,
+      suspendedOwners: mockBusinessOwners.filter((o) => o.status === "suspended").length,
+      totalHotels: mockBusinessOwners.reduce((sum, owner) => sum + (owner.totalHotels || owner.hotels.length), 0),
+      riskHotels: mockBusinessOwners.reduce(
+        (sum, owner) => sum + owner.hotels.filter((hotel) => hotel.status !== "operating").length,
+        0
+      ),
+    };
+
+    return createResponse({
+      owners: filtered,
+      summary,
+    });
+  },
+
+  getOwnerById: async (ownerId) => {
+    await delay();
+    const owner = mockBusinessOwners.find((o) => o.id === ownerId);
+    if (!owner) {
+      throw new Error("사업자를 찾을 수 없습니다.");
+    }
+    return createResponse(owner);
+  },
+
+  updateOwnerStatus: async (ownerId, status) => {
+    await delay();
+    const owner = mockBusinessOwners.find((o) => o.id === ownerId);
+    if (!owner) {
+      throw new Error("사업자를 찾을 수 없습니다.");
+    }
+    owner.status = status;
+    return createResponse({ id: ownerId, status });
+  },
+};
+
 // Mock 객실 API
 export const mockRoomApi = {
   getRooms: async () => {
@@ -416,17 +476,116 @@ export const mockReviewApi = {
   },
 };
 
+// Mock 쿠폰 API
+export const mockCouponApi = {
+  getCoupons: async (params = {}) => {
+    await delay();
+    let filtered = [...mockCoupons];
+
+    if (params.status) {
+      filtered = filtered.filter((coupon) => coupon.status === params.status);
+    }
+
+    if (params.search) {
+      const keyword = params.search.toLowerCase();
+      filtered = filtered.filter(
+        (coupon) =>
+          coupon.name.toLowerCase().includes(keyword) ||
+          coupon.code.toLowerCase().includes(keyword)
+      );
+    }
+
+    if (params.type) {
+      filtered = filtered.filter((coupon) => coupon.type === params.type);
+    }
+
+    const page = Number(params.page) || 1;
+    const pageSize = Number(params.pageSize) || 10;
+    const totalPages = Math.max(1, Math.ceil(filtered.length / pageSize));
+    const startIndex = (page - 1) * pageSize;
+
+    return createResponse({
+      coupons: filtered.slice(startIndex, startIndex + pageSize),
+      totalPages,
+      currentPage: page,
+      total: filtered.length,
+    });
+  },
+
+  getCouponById: async (couponId) => {
+    await delay();
+    const coupon = mockCoupons.find((c) => c.id === couponId);
+    if (!coupon) {
+      throw new Error("Coupon not found");
+    }
+    return createResponse(coupon);
+  },
+
+  createCoupon: async (data) => {
+    await delay();
+    const newCoupon = {
+      id: "CP" + String(mockCoupons.length + 1).padStart(3, "0"),
+      ...data,
+      usedCount: 0,
+      status: "active",
+      createdAt: new Date().toISOString().split("T")[0],
+    };
+    mockCoupons.push(newCoupon);
+    return createResponse(newCoupon);
+  },
+
+  updateCoupon: async (couponId, data) => {
+    await delay();
+    const coupon = mockCoupons.find((c) => c.id === couponId);
+    if (!coupon) {
+      throw new Error("Coupon not found");
+    }
+    Object.assign(coupon, data);
+    return createResponse(coupon);
+  },
+
+  deleteCoupon: async (couponId) => {
+    await delay();
+    const index = mockCoupons.findIndex((c) => c.id === couponId);
+    if (index === -1) {
+      throw new Error("Coupon not found");
+    }
+    mockCoupons.splice(index, 1);
+    return createResponse({ message: "Coupon deleted" });
+  },
+
+  updateCouponStatus: async (couponId, status) => {
+    await delay();
+    const coupon = mockCoupons.find((c) => c.id === couponId);
+    if (!coupon) {
+      throw new Error("Coupon not found");
+    }
+    coupon.status = status;
+    return createResponse({ id: couponId, status });
+  },
+};
+
 // Mock 통계 API
 export const mockStatsApi = {
   getDashboardStats: async () => {
     await delay();
+    const activeCoupons = mockCoupons.filter((c) => c.status === "active");
+    const totalUsed = mockCoupons.reduce((sum, c) => sum + (c.usedCount || 0), 0);
+    const totalLimit = mockCoupons.reduce((sum, c) => sum + (c.usageLimit || 0), 0);
+    const usageRate = totalLimit > 0 ? totalUsed / totalLimit : 0;
+
     return createResponse({
       hotel: mockHotel,
-      recentBookings: mockBookings,
+      couponStats: {
+        activeCount: activeCoupons.length,
+        totalCount: mockCoupons.length,
+        totalUsed: totalUsed,
+        usageRate: usageRate,
+      },
       chartData: {
         labels: ["1월", "2월", "3월", "4월", "5월", "6월"],
         revenue: [2000000, 2500000, 2200000, 2800000, 3000000, 3200000],
-        bookings: [45, 58, 52, 67, 72, 78],
+        couponUsage: [120, 145, 132, 168, 185, 198],
       },
     });
   },

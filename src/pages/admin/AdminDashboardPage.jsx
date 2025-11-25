@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { adminStatsApi } from "../../api/adminStatsApi";
 import AdminStatsCards from "../../components/admin/dashboard/AdminStatsCards";
 import AdminChartArea from "../../components/admin/dashboard/AdminChartArea";
-import AdminRecentTable from "../../components/admin/dashboard/AdminRecentTable";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
 
@@ -32,15 +31,15 @@ const AdminDashboardPage = () => {
 
   return (
     <div className="business-dashboard-page">
-      <h1 className="page-title">대시보드</h1>
+      <div className="page-header">
+        <div>
+          <h1 className="page-title">대시보드</h1>
+          <p className="page-subtitle">호텔 운영 현황을 한눈에 확인하세요</p>
+        </div>
+      </div>
 
       <AdminStatsCards stats={stats} />
       <AdminChartArea data={stats?.chartData} />
-
-      <div className="recent-activity">
-        <h2>최근 활동</h2>
-        <AdminRecentTable bookings={stats?.recentBookings || []} />
-      </div>
     </div>
   );
 };

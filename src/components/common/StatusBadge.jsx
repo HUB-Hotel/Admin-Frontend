@@ -34,6 +34,28 @@ const StatusBadge = ({ status, type = "booking" }) => {
       );
     }
 
+    if (type === "coupon") {
+      const statusMap = {
+        active: { label: "활성", className: "badge-success" },
+        inactive: { label: "비활성", className: "badge-secondary" },
+        expired: { label: "만료", className: "badge-danger" },
+      };
+      return (
+        statusMap[status] || { label: status, className: "badge-secondary" }
+      );
+    }
+
+    if (type === "business") {
+      const statusMap = {
+        active: { label: "운영 중", className: "badge-success" },
+        pending: { label: "심사 중", className: "badge-warning" },
+        suspended: { label: "중지", className: "badge-danger" },
+      };
+      return (
+        statusMap[status] || { label: status, className: "badge-secondary" }
+      );
+    }
+
     return { label: status, className: "badge-secondary" };
   };
 

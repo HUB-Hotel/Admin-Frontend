@@ -17,12 +17,12 @@ const RoomIcon = () => (
   </svg>
 );
 
-const BookingIcon = () => (
+const CouponIcon = () => (
   <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
-    <line x1="16" y1="2" x2="16" y2="6"></line>
-    <line x1="8" y1="2" x2="8" y2="6"></line>
-    <line x1="3" y1="10" x2="21" y2="10"></line>
+    <rect x="3" y="8" width="18" height="4" rx="1"></rect>
+    <path d="M12 8v13"></path>
+    <path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"></path>
+    <path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"></path>
   </svg>
 );
 
@@ -63,8 +63,8 @@ const AdminSidebar = () => {
 
   const menuItems = [
     { path: "/business/dashboard", label: "대시보드", icon: <DashboardIcon /> },
-    { path: "/business/rooms", label: "객실 관리", icon: <RoomIcon /> },
-    { path: "/business/bookings", label: "예약 관리", icon: <BookingIcon /> },
+    { path: "/business/owners", label: "사업자 관리", icon: <RoomIcon /> },
+    { path: "/business/coupons", label: "쿠폰 관리", icon: <CouponIcon /> },
     { path: "/business/statistics", label: "매출 통계", icon: <StatisticsIcon /> },
     { path: "/business/reviews", label: "리뷰 관리", icon: <ReviewIcon /> },
     { path: "/business/settings", label: "설정", icon: <SettingsIcon /> },
