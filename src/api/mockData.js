@@ -1,14 +1,14 @@
-// Mock 사업자 정보
+// Mock 관리자 정보
 export const mockBusinessUser = {
   id: "business-1",
-  name: "테스트 사업자",
+  name: "테스트 관리자",
   email: "business@hotel.com",
   phone: "010-1234-5678",
   businessNumber: "123-45-67890",
   createdAt: "2024-01-15",
 };
 
-// Mock 호텔 정보 (사업자당 1개)
+// Mock 호텔 정보 (관리자당 1개)
 export const mockHotel = {
   id: "hotel-1",
   name: "그랜드 서울 호텔",

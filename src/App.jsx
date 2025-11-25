@@ -1,15 +1,15 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { BusinessAuthProvider } from "./context/BusinessAuthContext";
-import businessRoutes from "./router/businessRoutes";
+import { AdminAuthProvider } from "./context/AdminAuthContext";
+import adminRoutes from "./router/adminRoutes";
 import "./styles/index.scss";
 
 function App() {
   return (
     <BrowserRouter>
-      <BusinessAuthProvider>
+      <AdminAuthProvider>
         <Routes>
           <Route path="/" element={<Navigate to="/business/login" replace />} />
-          {businessRoutes.map((route, index) => (
+          {adminRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.element}>
               {route.children?.map((child, childIndex) => (
                 <Route
@@ -22,7 +22,7 @@ function App() {
             </Route>
           ))}
         </Routes>
-      </BusinessAuthProvider>
+      </AdminAuthProvider>
     </BrowserRouter>
   );
 }

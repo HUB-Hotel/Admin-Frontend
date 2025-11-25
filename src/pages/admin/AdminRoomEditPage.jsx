@@ -1,0 +1,73 @@
+import { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { adminRoomApi } from "../../api/adminRoomApi";
+import AdminRoomForm from "../../components/admin/rooms/AdminRoomForm";
+import Loader from "../../components/common/Loader";
+import ErrorMessage from "../../components/common/ErrorMessage";
+import AlertModal from "../../components/common/AlertModal";
+
+const AdminRoomEditPage = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const [room, setRoom] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "info" });
+
+  useEffect(() => {
+    fetchRoom();
+  }, [id]);
+
+  const fetchRoom = async () => {
+    try {
+      setLoading(true);
+      const data = await adminRoomApi.getRoomById(id);
+      setRoom(data);
+    } catch (err) {
+      setError(err.message || "객실 정보를 불러오는데 실패했습니다.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSubmit = async (data) => {
+    try {
+      await adminRoomApi.updateRoom(id, data);
+      setAlertModal({ isOpen: true, message: "객실이 수정되었습니다.", type: "success" });
+      setTimeout(() => {
+        navigate("/business/rooms");
+      }, 1000);
+    } catch (err) {
+      setAlertModal({ isOpen: true, message: "객실 수정에 실패했습니다.", type: "error" });
+    }
+  };
+
+  const handleCancel = () => {
+    navigate("/business/rooms");
+  };
+
+  if (loading) return <Loader fullScreen />;
+  if (error) return <ErrorMessage message={error} onRetry={fetchRoom} />;
+
+  return (
+    <div className="business-room-edit-page">
+      <div className="page-header">
+        <h1>객실 수정</h1>
+      </div>
+
+      <div className="card">
+        <AdminRoomForm room={room} onSubmit={handleSubmit} onCancel={handleCancel} />
+      </div>
+
+      <AlertModal
+        isOpen={alertModal.isOpen}
+        message={alertModal.message}
+        type={alertModal.type}
+        onClose={() => setAlertModal({ isOpen: false, message: "", type: "info" })}
+      />
+    </div>
+  );
+};
+
+export default AdminRoomEditPage;
+

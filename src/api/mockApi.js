@@ -189,11 +189,11 @@ export const mockAuthApi = {
 
     const tempUserData = JSON.parse(tempUser);
     
-    // 이미 등록된 사업자 등록번호인지 확인
+    // 이미 등록된 관리자 등록번호인지 확인
     const users = getRegisteredUsers();
     const existingBusiness = users.find((u) => u.businessNumber === data.businessNumber);
     if (existingBusiness) {
-      throw new Error("이미 등록된 사업자 등록번호입니다.");
+      throw new Error("이미 등록된 관리자 등록번호입니다.");
     }
 
     // 카카오 사용자 정보 저장
