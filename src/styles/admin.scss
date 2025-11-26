@@ -1110,6 +1110,7 @@
       }
     }
   }
+}
 
 .business-settings-page {
   .settings-container {
@@ -1131,6 +1132,7 @@
     margin-bottom: $spacing-lg;
   }
 
+  button.settings-tab,
   .settings-tab {
     display: flex !important;
     align-items: center !important;
@@ -1149,6 +1151,9 @@
     box-shadow: $shadow-sm !important;
     white-space: nowrap !important;
     overflow: hidden !important;
+    appearance: none !important;
+    -webkit-appearance: none !important;
+    margin: 0 !important;
 
     &::before {
       content: "";
@@ -1173,6 +1178,7 @@
       transition: opacity 0.3s ease;
     }
 
+    &:hover:not(:disabled),
     &:hover {
       background: rgba($primary-color, 0.08) !important;
       color: $text-primary !important;
@@ -1185,7 +1191,8 @@
       }
     }
 
-    &.active {
+    &.active,
+    &:active {
       background: $primary-color !important;
       color: $text-white !important;
       font-weight: 600 !important;
@@ -1528,7 +1535,6 @@
       }
     }
   }
-}
 
 // 에러 메시지
 .error-message {
