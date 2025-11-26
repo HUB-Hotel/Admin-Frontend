@@ -452,6 +452,8 @@ export const mockReviewApi = {
     if (review) {
       review.status = "reported";
       review.reportReason = reason;
+      review.reportedAt = new Date().toISOString().split("T")[0];
+      review.reportedBy = "그랜드 서울 호텔"; // 실제로는 현재 로그인한 사업자 정보
     }
     return createResponse({ message: "Review reported" });
   },
@@ -462,6 +464,8 @@ export const mockReviewApi = {
     if (review) {
       review.status = "reported";
       review.reportReason = reason;
+      review.reportedAt = new Date().toISOString().split("T")[0];
+      review.reportedBy = "그랜드 서울 호텔"; // 실제로는 현재 로그인한 사업자 정보
     }
     return createResponse({ message: "Review reported" });
   },
@@ -473,6 +477,32 @@ export const mockReviewApi = {
       averageRating: 3.7,
       ratingDistribution: { 5: 1, 4: 1, 3: 0, 2: 1, 1: 0 },
     });
+  },
+
+  approveReport: async (reviewId) => {
+    await delay();
+    const review = mockReviews.find((r) => r.id === reviewId);
+    if (review) {
+      // 신고 승인 시 리뷰 삭제 (배열에서 제거)
+      const index = mockReviews.findIndex((r) => r.id === reviewId);
+      if (index !== -1) {
+        mockReviews.splice(index, 1);
+      }
+    }
+    return createResponse({ message: "Review deleted after report approval" });
+  },
+
+  rejectReport: async (reviewId) => {
+    await delay();
+    const review = mockReviews.find((r) => r.id === reviewId);
+    if (review) {
+      // 신고 거부 시 리뷰 상태를 approved로 변경
+      review.status = "approved";
+      review.reportReason = undefined;
+      review.reportedAt = undefined;
+      review.reportedBy = undefined;
+    }
+    return createResponse({ message: "Report rejected, review restored" });
   },
 };
 

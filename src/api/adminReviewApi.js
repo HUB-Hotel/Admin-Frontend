@@ -28,6 +28,16 @@ export const adminReviewApi = {
     if (USE_MOCK) return mockReviewApi.getStats();
     return axiosClient.get("/business/reviews/stats");
   },
+
+  approveReport: async (id) => {
+    if (USE_MOCK) return mockReviewApi.approveReport(id);
+    return axiosClient.post(`/business/reviews/${id}/report/approve`);
+  },
+
+  rejectReport: async (id) => {
+    if (USE_MOCK) return mockReviewApi.rejectReport(id);
+    return axiosClient.post(`/business/reviews/${id}/report/reject`);
+  },
 };
 
 export default adminReviewApi;

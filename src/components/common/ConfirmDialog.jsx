@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel }) => {
+const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel, confirmText, cancelText }) => {
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -42,14 +42,14 @@ const ConfirmDialog = ({ isOpen, title, message, onConfirm, onCancel }) => {
             className="custom-modal-button custom-modal-button-outline" 
             onClick={onCancel}
           >
-            취소
+            {cancelText || "취소"}
           </button>
           <button 
             className="custom-modal-button" 
             onClick={onConfirm}
             style={{ backgroundColor: "#7FD8BE" }}
           >
-            확인
+            {confirmText || "확인"}
           </button>
         </div>
       </div>

@@ -174,6 +174,9 @@ export const mockReviews = [
     comment: "청결 상태가 좋지 않았고 직원들의 서비스도 아쉬웠습니다.",
     date: "2025-11-08",
     status: "reported",
+    reportReason: "부정확한 정보로 인한 명예훼손 우려가 있습니다.",
+    reportedAt: "2025-11-09",
+    reportedBy: "그랜드 서울 호텔",
   },
 ];
 
