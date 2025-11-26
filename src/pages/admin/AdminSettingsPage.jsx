@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSearchParams } from "react-router-dom";
 import Loader from "../../components/common/Loader";
 import ErrorMessage from "../../components/common/ErrorMessage";
 import AlertModal from "../../components/common/AlertModal";
@@ -9,13 +10,6 @@ const SiteIcon = () => (
     <circle cx="12" cy="12" r="10"></circle>
     <line x1="2" y1="12" x2="22" y2="12"></line>
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path>
-  </svg>
-);
-
-const CommissionIcon = () => (
-  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <line x1="12" y1="1" x2="12" y2="23"></line>
-    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
   </svg>
 );
 
@@ -45,14 +39,15 @@ const NotificationIcon = () => (
 
 const SETTINGS_TABS = [
   { id: "site", label: "사이트 설정", icon: <SiteIcon /> },
-  { id: "commission", label: "수수료/정산", icon: <CommissionIcon /> },
   { id: "policy", label: "운영 정책", icon: <PolicyIcon /> },
   { id: "security", label: "보안 설정", icon: <SecurityIcon /> },
   { id: "notifications", label: "알림 설정", icon: <NotificationIcon /> },
 ];
 
 const AdminSettingsPage = () => {
-  const [activeTab, setActiveTab] = useState("site");
+  const [searchParams, setSearchParams] = useSearchParams();
+  const tabFromUrl = searchParams.get("tab");
+  const [activeTab, setActiveTab] = useState(tabFromUrl || "site");
   const [alertModal, setAlertModal] = useState({ isOpen: false, message: "", type: "info" });
   const [siteSettings, setSiteSettings] = useState({
     siteName: "호텔 예약 플랫폼",
@@ -61,13 +56,6 @@ const AdminSettingsPage = () => {
     maintenanceMode: false,
     allowNewRegistrations: true,
     defaultLanguage: "ko",
-  });
-  const [commissionSettings, setCommissionSettings] = useState({
-    commissionRate: 10,
-    settlementCycle: "monthly",
-    minimumSettlementAmount: 100000,
-    autoSettlement: true,
-    taxIncluded: false,
   });
   const [policySettings, setPolicySettings] = useState({
     reviewPolicy: "auto",
@@ -96,17 +84,19 @@ const AdminSettingsPage = () => {
 
   useEffect(() => {
     loadSettings();
-  }, []);
+    const tabFromUrl = searchParams.get("tab");
+    if (tabFromUrl && ["site", "policy", "security", "notifications"].includes(tabFromUrl)) {
+      setActiveTab(tabFromUrl);
+    }
+  }, [searchParams]);
 
   const loadSettings = () => {
     const savedSiteSettings = localStorage.getItem("adminSiteSettings");
-    const savedCommissionSettings = localStorage.getItem("adminCommissionSettings");
     const savedPolicySettings = localStorage.getItem("adminPolicySettings");
     const savedSecuritySettings = localStorage.getItem("adminSecuritySettings");
     const savedNotificationSettings = localStorage.getItem("adminNotificationSettings");
 
     if (savedSiteSettings) setSiteSettings(JSON.parse(savedSiteSettings));
-    if (savedCommissionSettings) setCommissionSettings(JSON.parse(savedCommissionSettings));
     if (savedPolicySettings) setPolicySettings(JSON.parse(savedPolicySettings));
     if (savedSecuritySettings) setSecuritySettings(JSON.parse(savedSecuritySettings));
     if (savedNotificationSettings) setNotificationSettings(JSON.parse(savedNotificationSettings));
@@ -117,13 +107,6 @@ const AdminSettingsPage = () => {
     setSiteSettings(updated);
     localStorage.setItem("adminSiteSettings", JSON.stringify(updated));
     setAlertModal({ isOpen: true, message: "사이트 설정이 저장되었습니다.", type: "success" });
-  };
-
-  const handleCommissionSettingsChange = (field, value) => {
-    const updated = { ...commissionSettings, [field]: value };
-    setCommissionSettings(updated);
-    localStorage.setItem("adminCommissionSettings", JSON.stringify(updated));
-    setAlertModal({ isOpen: true, message: "수수료 설정이 저장되었습니다.", type: "success" });
   };
 
   const handlePolicySettingsChange = (field, value) => {
@@ -162,7 +145,10 @@ const AdminSettingsPage = () => {
             <button
               key={tab.id}
               className={`settings-tab ${activeTab === tab.id ? "active" : ""}`}
-              onClick={() => setActiveTab(tab.id)}
+              onClick={() => {
+                setActiveTab(tab.id);
+                setSearchParams({ tab: tab.id });
+              }}
             >
               <span className="tab-icon">{tab.icon}</span>
               <span>{tab.label}</span>
@@ -176,15 +162,6 @@ const AdminSettingsPage = () => {
               <SiteSettingsForm
                 settings={siteSettings}
                 onChange={handleSiteSettingsChange}
-              />
-            </div>
-          )}
-
-          {activeTab === "commission" && (
-            <div className="card">
-              <CommissionSettingsForm
-                settings={commissionSettings}
-                onChange={handleCommissionSettingsChange}
               />
             </div>
           )}
@@ -301,78 +278,6 @@ const SiteSettingsForm = ({ settings, onChange }) => {
           <span>신규 회원가입 허용</span>
         </label>
         <p className="form-help">체크 해제 시 새로운 회원가입을 받지 않습니다.</p>
-      </div>
-    </form>
-  );
-};
-
-// 수수료/정산 설정 폼 컴포넌트
-const CommissionSettingsForm = ({ settings, onChange }) => {
-  return (
-    <form className="form">
-      <h4>수수료 설정</h4>
-
-      <div className="form-group">
-        <label>기본 수수료율 (%)</label>
-        <input
-          type="number"
-          min="0"
-          max="100"
-          step="0.1"
-          value={settings.commissionRate}
-          onChange={(e) => onChange("commissionRate", parseFloat(e.target.value))}
-        />
-        <p className="form-help">사업자에게 부과되는 기본 수수료율입니다.</p>
-      </div>
-
-      <div className="form-group">
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={settings.taxIncluded}
-            onChange={(e) => onChange("taxIncluded", e.target.checked)}
-          />
-          <span>부가세 포함</span>
-        </label>
-        <p className="form-help">수수료에 부가세가 포함되어 있는지 여부입니다.</p>
-      </div>
-
-      <h4>정산 설정</h4>
-
-      <div className="form-group">
-        <label>정산 주기</label>
-        <select
-          value={settings.settlementCycle}
-          onChange={(e) => onChange("settlementCycle", e.target.value)}
-        >
-          <option value="daily">일일 정산</option>
-          <option value="weekly">주간 정산</option>
-          <option value="monthly">월간 정산</option>
-          <option value="quarterly">분기 정산</option>
-        </select>
-      </div>
-
-      <div className="form-group">
-        <label>최소 정산 금액 (원)</label>
-        <input
-          type="number"
-          min="0"
-          value={settings.minimumSettlementAmount}
-          onChange={(e) => onChange("minimumSettlementAmount", parseInt(e.target.value))}
-        />
-        <p className="form-help">이 금액 이상일 때만 정산이 진행됩니다.</p>
-      </div>
-
-      <div className="form-group">
-        <label className="checkbox-label">
-          <input
-            type="checkbox"
-            checked={settings.autoSettlement}
-            onChange={(e) => onChange("autoSettlement", e.target.checked)}
-          />
-          <span>자동 정산 활성화</span>
-        </label>
-        <p className="form-help">설정한 정산 주기에 따라 자동으로 정산이 진행됩니다.</p>
       </div>
     </form>
   );

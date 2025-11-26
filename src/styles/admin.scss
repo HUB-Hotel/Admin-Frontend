@@ -1635,3 +1635,144 @@
     }
   }
 }
+
+// 대시보드 페이지
+.business-dashboard-page {
+  .dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: $spacing-lg;
+    margin-top: $spacing-xl;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    @media (max-width: 768px) {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  .dashboard-card {
+    background: $bg-primary;
+    border-radius: $border-radius;
+    padding: $spacing-xl;
+    border: 1px solid $border-color;
+    box-shadow: $shadow-sm;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 4px;
+      height: 100%;
+      background: var(--card-color, $primary-color);
+    }
+
+    &:hover {
+      transform: translateY(-4px);
+      box-shadow: $shadow-lg;
+      border-color: var(--card-color, $primary-color);
+
+      .dashboard-card-link {
+        color: var(--card-color, $primary-color);
+        transform: translateX(4px);
+      }
+    }
+
+    .dashboard-card-header {
+      display: flex;
+      align-items: center;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+    }
+
+    .dashboard-card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 48px;
+      height: 48px;
+      border-radius: $border-radius;
+      background: rgba(var(--card-color-rgb, 127, 216, 190), 0.1);
+      flex-shrink: 0;
+    }
+
+    .dashboard-card-title {
+      font-size: $font-size-xl;
+      font-weight: 600;
+      color: $text-primary;
+      margin: 0;
+    }
+
+    .dashboard-card-stats {
+      display: flex;
+      flex-direction: column;
+      gap: $spacing-md;
+      margin-bottom: $spacing-lg;
+    }
+
+    .dashboard-stat {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: $spacing-sm $spacing-md;
+      background: $bg-secondary;
+      border-radius: $border-radius;
+      transition: all 0.2s ease;
+
+      &.highlight {
+        background: rgba(239, 68, 68, 0.1);
+        border-left: 3px solid $danger-color;
+
+        .dashboard-stat-value {
+          color: $danger-color;
+          font-weight: 600;
+        }
+      }
+
+      &.clickable {
+        cursor: pointer;
+
+        &:hover {
+          background: rgba(var(--card-color-rgb, 127, 216, 190), 0.1);
+          transform: translateX(4px);
+        }
+      }
+    }
+
+    .dashboard-stat-label {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      font-weight: 500;
+    }
+
+    .dashboard-stat-value {
+      font-size: $font-size-base;
+      font-weight: 600;
+      color: $text-primary;
+    }
+
+    .dashboard-card-footer {
+      display: flex;
+      justify-content: flex-end;
+      padding-top: $spacing-md;
+      border-top: 1px solid $border-color;
+    }
+
+    .dashboard-card-link {
+      font-size: $font-size-sm;
+      color: $text-secondary;
+      font-weight: 500;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: $spacing-xs;
+    }
+  }
+}
