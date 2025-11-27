@@ -40,12 +40,6 @@ export const AdminAuthProvider = ({ children }) => {
     }
   };
 
-  const signup = async (userData) => {
-    const data = await adminAuthApi.signup(userData);
-    localStorage.setItem("businessToken", data.token);
-    setAdminInfo(data.business);
-  };
-
   const kakaoLogin = async (kakaoToken) => {
     const data = await adminAuthApi.kakaoLogin(kakaoToken);
     
@@ -67,7 +61,7 @@ export const AdminAuthProvider = ({ children }) => {
 
   return (
     <AdminAuthContext.Provider
-      value={{ adminInfo, loading, login, logout, signup, checkAuth, kakaoLogin }}
+      value={{ adminInfo, loading, login, logout, checkAuth, kakaoLogin }}
     >
       {children}
     </AdminAuthContext.Provider>

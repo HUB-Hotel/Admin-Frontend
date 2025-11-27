@@ -1,7 +1,6 @@
 import { Navigate } from "react-router-dom";
 import AdminLayout from "../components/layout/AdminLayout";
 import AdminLoginPage from "../pages/auth/AdminLoginPage";
-import AdminSignupPage from "../pages/auth/AdminSignupPage";
 import AdminForgotPasswordPage from "../pages/auth/AdminForgotPasswordPage";
 import AdminKakaoCompletePage from "../pages/auth/AdminKakaoCompletePage";
 import AdminDashboardPage from "../pages/admin/AdminDashboardPage";
@@ -19,10 +18,6 @@ const adminRoutes = [
   {
     path: "/admin/login",
     element: <AdminLoginPage />,
-  },
-  {
-    path: "/admin/signup",
-    element: <AdminSignupPage />,
   },
   {
     path: "/admin/forgot-password",

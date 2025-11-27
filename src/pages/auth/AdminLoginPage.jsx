@@ -141,8 +141,6 @@ const AdminLoginPage = () => {
 
           <div className="auth-links">
             <Link to="/admin/forgot-password">비밀번호 찾기</Link>
-            <span style={{ margin: "0 0.5rem" }}>|</span>
-            <Link to="/admin/signup">회원가입</Link>
           </div>
 
           <div className="auth-divider">
