@@ -67,7 +67,7 @@ const AdminSignupPage = () => {
 
   const handleSuccessConfirm = () => {
     setShowSuccessModal(false);
-    navigate("/business/login");
+    navigate("/admin/login");
   };
 
   return (
@@ -171,7 +171,7 @@ const AdminSignupPage = () => {
           </form>
 
           <div className="auth-links">
-            <Link to="/business/login">이미 계정이 있으신가요? 로그인</Link>
+            <Link to="/admin/login">이미 계정이 있으신가요? 로그인</Link>
           </div>
         </div>
       </div>

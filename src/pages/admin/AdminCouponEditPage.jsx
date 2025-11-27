@@ -41,7 +41,7 @@ const AdminCouponEditPage = () => {
         type: "success",
       });
       setTimeout(() => {
-        navigate("/business/coupons");
+        navigate("/admin/coupons");
       }, 1500);
     } catch (err) {
       setAlertModal({
@@ -55,7 +55,7 @@ const AdminCouponEditPage = () => {
   };
 
   const handleCancel = () => {
-    navigate("/business/coupons");
+    navigate("/admin/coupons");
   };
 
   if (loading) return <Loader fullScreen />;

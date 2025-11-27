@@ -28,7 +28,7 @@ const AdminForgotPasswordPage = () => {
             <p>비밀번호 재설정 링크가 이메일로 전송되었습니다.</p>
             <p>이메일을 확인해주세요.</p>
           </div>
-          <Link to="/business/login" className="btn btn-primary" style={{ width: "100%" }}>
+          <Link to="/admin/login" className="btn btn-primary" style={{ width: "100%" }}>
             로그인으로 돌아가기
           </Link>
         </div>
@@ -61,7 +61,7 @@ const AdminForgotPasswordPage = () => {
         </form>
 
         <div style={{ textAlign: "center", marginTop: "1rem" }}>
-          <Link to="/business/login">로그인으로 돌아가기</Link>
+          <Link to="/admin/login">로그인으로 돌아가기</Link>
         </div>
       </div>
     </div>

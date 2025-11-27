@@ -31,7 +31,7 @@ const AdminCouponTable = ({ coupons, onStatusChange, onDelete }) => {
           {coupons.map((coupon) => (
             <tr key={coupon.id}>
               <td>
-                <Link to={`/business/coupons/${coupon.id}`} className="link-primary">
+                <Link to={`/admin/coupons/${coupon.id}`} className="link-primary">
                   {coupon.name}
                 </Link>
               </td>
@@ -57,7 +57,7 @@ const AdminCouponTable = ({ coupons, onStatusChange, onDelete }) => {
               <td>
                 <div className="coupon-actions">
                   <Link
-                    to={`/business/coupons/${coupon.id}/edit`}
+                    to={`/admin/coupons/${coupon.id}/edit`}
                     className="btn btn-sm btn-outline"
                   >
                     수정

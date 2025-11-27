@@ -17,28 +17,28 @@ import AdminMyProfilePage from "../pages/admin/AdminMyProfilePage";
 
 const adminRoutes = [
   {
-    path: "/business/login",
+    path: "/admin/login",
     element: <AdminLoginPage />,
   },
   {
-    path: "/business/signup",
+    path: "/admin/signup",
     element: <AdminSignupPage />,
   },
   {
-    path: "/business/forgot-password",
+    path: "/admin/forgot-password",
     element: <AdminForgotPasswordPage />,
   },
   {
-    path: "/business/kakao/complete",
+    path: "/admin/kakao/complete",
     element: <AdminKakaoCompletePage />,
   },
   {
-    path: "/business",
+    path: "/admin",
     element: <AdminLayout />,
     children: [
       {
         index: true,
-        element: <Navigate to="/business/dashboard" replace />,
+        element: <Navigate to="/admin/dashboard" replace />,
       },
       {
         path: "dashboard",

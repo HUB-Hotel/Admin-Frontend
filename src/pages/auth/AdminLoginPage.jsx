@@ -40,10 +40,10 @@ const AdminLoginPage = () => {
             
             if (result.needsAdditionalInfo) {
               // 추가 정보 입력 페이지로 이동
-              navigate(`/business/kakao/complete?tempUserId=${result.tempUserId}`);
+              navigate(`/admin/kakao/complete?tempUserId=${result.tempUserId}`);
             } else {
               // 바로 대시보드로 이동
-              navigate("/business/dashboard");
+              navigate("/admin/dashboard");
             }
           } catch (err) {
             setError(err.message || "카카오 로그인에 실패했습니다.");
@@ -75,7 +75,7 @@ const AdminLoginPage = () => {
 
     try {
       await login(formData);
-      navigate("/business/dashboard");
+      navigate("/admin/dashboard");
     } catch (err) {
       setError(err.message || "로그인에 실패했습니다.");
     } finally {
@@ -140,9 +140,9 @@ const AdminLoginPage = () => {
           </form>
 
           <div className="auth-links">
-            <Link to="/business/forgot-password">비밀번호 찾기</Link>
+            <Link to="/admin/forgot-password">비밀번호 찾기</Link>
             <span style={{ margin: "0 0.5rem" }}>|</span>
-            <Link to="/business/signup">회원가입</Link>
+            <Link to="/admin/signup">회원가입</Link>
           </div>
 
           <div className="auth-divider">

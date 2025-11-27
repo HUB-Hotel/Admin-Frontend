@@ -30,7 +30,7 @@ axiosClient.interceptors.response.use(
   (error) => {
     if (error.response?.status === 401) {
       localStorage.removeItem("businessToken");
-      window.location.href = "/business/login";
+      window.location.href = "/admin/login";
     }
     return Promise.reject(error);
   }

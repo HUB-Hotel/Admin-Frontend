@@ -35,7 +35,7 @@ const AdminRecentTable = ({ bookings = [] }) => {
           {bookings.map((booking) => (
             <tr key={booking.id}>
               <td>
-                <Link to={`/business/bookings/${booking.id}`} className="link-primary">
+                <Link to={`/admin/bookings/${booking.id}`} className="link-primary">
                   {booking.id}
                 </Link>
               </td>

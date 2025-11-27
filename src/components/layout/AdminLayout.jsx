@@ -10,7 +10,7 @@ const AdminLayout = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/business/login");
+    navigate("/admin/login");
   };
 
   if (loading) {
@@ -24,7 +24,7 @@ const AdminLayout = () => {
   }
 
   if (!adminInfo) {
-    return <Navigate to="/business/login" replace />;
+    return <Navigate to="/admin/login" replace />;
   }
 
   return (

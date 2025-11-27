@@ -32,7 +32,7 @@ const AdminReviewTable = ({ reviews, onReport }) => {
                 <StatusBadge status={review.status} type="review" />
               </td>
               <td>
-                <Link to={`/business/reviews/${review.id}`} className="btn btn-sm btn-outline">
+                <Link to={`/admin/reviews/${review.id}`} className="btn btn-sm btn-outline">
                   상세
                 </Link>
                 {review.status !== "reported" && (

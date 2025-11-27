@@ -89,7 +89,7 @@ const AdminCouponListPage = () => {
         <h1>쿠폰 관리</h1>
         <button
           className="btn btn-primary"
-          onClick={() => navigate("/business/coupons/create")}
+          onClick={() => navigate("/admin/coupons/create")}
         >
           쿠폰 생성
         </button>

@@ -20,7 +20,7 @@ const AdminKakaoCompletePage = () => {
     const tempUserId = searchParams.get("tempUserId");
     if (!tempUserId) {
       // 임시 사용자 정보가 없으면 로그인 페이지로 리다이렉트
-      navigate("/business/login");
+      navigate("/admin/login");
     }
   }, [searchParams, navigate]);
 
@@ -61,7 +61,7 @@ const AdminKakaoCompletePage = () => {
       
       // 로그인 처리
       localStorage.setItem("businessToken", data.token);
-      navigate("/business/dashboard");
+      navigate("/admin/dashboard");
     } catch (err) {
       setError(err.message || "회원가입 완료에 실패했습니다.");
     } finally {

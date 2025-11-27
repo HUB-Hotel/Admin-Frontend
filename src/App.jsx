@@ -8,7 +8,7 @@ function App() {
     <BrowserRouter>
       <AdminAuthProvider>
         <Routes>
-          <Route path="/" element={<Navigate to="/business/login" replace />} />
+          <Route path="/" element={<Navigate to="/admin/login" replace />} />
           {adminRoutes.map((route, index) => (
             <Route key={index} path={route.path} element={route.element}>
               {route.children?.map((child, childIndex) => (

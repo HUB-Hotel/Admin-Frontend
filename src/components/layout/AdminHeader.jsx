@@ -9,7 +9,7 @@ const AdminHeader = () => {
 
   const handleLogout = async () => {
     await logout();
-    navigate("/business/login");
+    navigate("/admin/login");
   };
 
   const isActive = (path) => {
@@ -20,32 +20,32 @@ const AdminHeader = () => {
     <header className="business-header">
       <div className="container">
         <div className="business-header__inner">
-          <Link to="/business/dashboard" className="business-header__logo">
+          <Link to="/admin/dashboard" className="business-header__logo">
             <h1>Hotelhub Business</h1>
           </Link>
 
           <nav className="business-header__nav">
             <Link
-              to="/business/dashboard"
-              className={`business-header__nav-link ${isActive("/business/dashboard")}`}
+              to="/admin/dashboard"
+              className={`business-header__nav-link ${isActive("/admin/dashboard")}`}
             >
               대시보드
             </Link>
             <Link
-              to="/business/rooms"
-              className={`business-header__nav-link ${isActive("/business/rooms")}`}
+              to="/admin/rooms"
+              className={`business-header__nav-link ${isActive("/admin/rooms")}`}
             >
               객실 관리
             </Link>
             <Link
-              to="/business/statistics"
-              className={`business-header__nav-link ${isActive("/business/statistics")}`}
+              to="/admin/statistics"
+              className={`business-header__nav-link ${isActive("/admin/statistics")}`}
             >
               매출 통계
             </Link>
             <Link
-              to="/business/reviews"
-              className={`business-header__nav-link ${isActive("/business/reviews")}`}
+              to="/admin/reviews"
+              className={`business-header__nav-link ${isActive("/admin/reviews")}`}
             >
               리뷰 관리
             </Link>

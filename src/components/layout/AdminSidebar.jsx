@@ -62,19 +62,19 @@ const AdminSidebar = () => {
   };
 
   const menuItems = [
-    { path: "/business/dashboard", label: "대시보드", icon: <DashboardIcon /> },
-    { path: "/business/owners", label: "사업자 관리", icon: <RoomIcon /> },
-    { path: "/business/coupons", label: "쿠폰 관리", icon: <CouponIcon /> },
-    { path: "/business/statistics", label: "매출 통계", icon: <StatisticsIcon /> },
-    { path: "/business/reviews", label: "리뷰 관리", icon: <ReviewIcon /> },
-    { path: "/business/settings", label: "설정", icon: <SettingsIcon /> },
-    { path: "/business/profile", label: "내 정보", icon: <ProfileIcon /> },
+    { path: "/admin/dashboard", label: "대시보드", icon: <DashboardIcon /> },
+    { path: "/admin/owners", label: "사업자 관리", icon: <RoomIcon /> },
+    { path: "/admin/coupons", label: "쿠폰 관리", icon: <CouponIcon /> },
+    { path: "/admin/statistics", label: "매출 통계", icon: <StatisticsIcon /> },
+    { path: "/admin/reviews", label: "리뷰 관리", icon: <ReviewIcon /> },
+    { path: "/admin/settings", label: "설정", icon: <SettingsIcon /> },
+    { path: "/admin/profile", label: "내 정보", icon: <ProfileIcon /> },
   ];
 
   return (
     <aside className="business-sidebar">
       <div className="sidebar-logo">
-        <Link to="/business/dashboard">
+        <Link to="/admin/dashboard">
           <h1>호텔 관리자</h1>
         </Link>
       </div>
