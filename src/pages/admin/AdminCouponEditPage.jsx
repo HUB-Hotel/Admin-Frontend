@@ -22,9 +22,16 @@ const AdminCouponEditPage = () => {
   const fetchCoupon = async () => {
     try {
       setLoading(true);
+      setError("");
+      console.log('쿠폰 조회 시작, ID:', id);
       const data = await adminCouponApi.getCouponById(id);
+      console.log('쿠폰 조회 성공:', data);
+      if (!data) {
+        throw new Error("쿠폰을 찾을 수 없습니다.");
+      }
       setCoupon(data);
     } catch (err) {
+      console.error('쿠폰 조회 에러:', err);
       setError(err.message || "쿠폰 정보를 불러오는데 실패했습니다.");
     } finally {
       setLoading(false);
