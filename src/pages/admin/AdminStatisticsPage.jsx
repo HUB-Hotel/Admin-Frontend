@@ -31,7 +31,6 @@ const AdminStatisticsPage = () => {
 
   useEffect(() => {
     fetchStats();
-    fetchRevenueTrend("month");
   }, []);
 
   const fetchStats = async () => {
@@ -40,26 +39,15 @@ const AdminStatisticsPage = () => {
       const data = await adminStatsApi.getStatistics();
       console.log("통계 데이터:", data);
       setStats(data);
+      // 통계 데이터에서 추이 정보 추출
+      if (data.trend) {
+        setRevenueTrend(data.trend);
+      }
     } catch (err) {
       console.error("통계 로드 에러:", err);
       setError(err.message || "통계를 불러오는데 실패했습니다.");
     } finally {
       setLoading(false);
-    }
-  };
-
-  const fetchRevenueTrend = async (nextPeriod) => {
-    try {
-      setChartLoading(true);
-      setPeriod(nextPeriod);
-      const data = await adminStatsApi.getRevenueStats(nextPeriod);
-      console.log("매출 추이 데이터:", data);
-      setRevenueTrend(data);
-    } catch (err) {
-      console.error("매출 추이 로드 에러:", err);
-      setError(err.message || "매출 추이를 불러오는데 실패했습니다.");
-    } finally {
-      setChartLoading(false);
     }
   };
 
@@ -239,7 +227,10 @@ const AdminStatisticsPage = () => {
                 key={option.value}
                 type="button"
                 className={`chart-filter-btn ${period === option.value ? "active" : ""}`}
-                onClick={() => fetchRevenueTrend(option.value)}
+                onClick={() => {
+                  setPeriod(option.value);
+                  fetchStats();
+                }}
                 disabled={chartLoading && period === option.value}
               >
                 {option.label}
